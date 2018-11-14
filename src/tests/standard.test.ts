@@ -1,10 +1,10 @@
-import TestUtils from './testutils';
-import LoginPage from './pages/LoginPage';
-import InngangPage from './pages/InngangPage';
-import VelkommenPage from './pages/VelkommenPage';
-import RelasjonTilBarnFødselPage from './pages/RelasjonTilBarnFødselPage';
+import TestUtils from '../utils/testutils';
+import LoginPage from '../pages/LoginPage';
+import InngangPage from '../pages/InngangPage';
+import VelkommenPage from '../pages/VelkommenPage';
+import RelasjonTilBarnFødselPage from '../pages/RelasjonTilBarnFødselPage';
 
-import { config } from '../config';
+import { config } from '../../config';
 
 const loginPage = new LoginPage();
 const inngangPage = new InngangPage();

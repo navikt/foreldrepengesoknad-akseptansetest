@@ -1,4 +1,4 @@
-import TestUtils from '../testutils';
+import TestUtils from '../utils/testutils';
 import { Selector } from 'testcafe';
 
 export default class RelasjonTilBarnFødselPM {

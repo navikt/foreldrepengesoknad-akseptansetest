@@ -1,4 +1,4 @@
-import TestUtils from '../testutils';
+import TestUtils from '../utils/testutils';
 
 export default class InngangPageModel {
     søkersituasjon: Selector;
