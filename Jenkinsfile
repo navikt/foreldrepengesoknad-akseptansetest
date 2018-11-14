@@ -20,7 +20,7 @@ node {
           sh 'npm i'
        }
 
-       withCredentials([file(credentialsId: 'engangsstonad_e2e_config', variable: 'TESTCONF')]) {
+       withCredentials([file(credentialsId: 'foreldrepengesoknad_e2e_config', variable: 'TESTCONF')]) {
           sh 'cat $TESTCONF > config.js'
        }
     }
