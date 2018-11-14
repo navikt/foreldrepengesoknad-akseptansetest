@@ -12,6 +12,9 @@ const velkommenPage = new VelkommenPage();
 const relasjonTilBarnetPage = new RelasjonTilBarnFødselPage();
 
 fixture(`Foreldrepengesøknad`).beforeEach(async t => {
+    if (config.skipLogin) {
+        return;
+    }
     await t.useRole(loginPage.login(config.fnr_default));
 });
 

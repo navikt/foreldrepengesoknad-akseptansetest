@@ -32,14 +32,14 @@ node {
           }
           slackSend([
              color: 'good',
-             message: "Akseptansetestene for engangsstønad er OK :tada:"
+             message: "Akseptansetestene for foreldrepengesøknad er OK :tada:"
           ])
        } catch (Exception ex) {
           slackSend([
              color: 'danger',
-             message: "Akseptansetesten(e) for engangsstønad feilet, sjekk status på $env.BUILD_URL"
+             message: "Akseptansetesten(e) for foreldrepengesøknad feilet, sjekk status på $env.BUILD_URL"
           ])
-          throw new Exception("Akseptansetesten(e) for engangsstønad feilet", ex)
+          throw new Exception("Akseptansetesten(e) for foreldrepengesøknad feilet", ex)
        } finally {
           sh 'rm config.js'
        }
