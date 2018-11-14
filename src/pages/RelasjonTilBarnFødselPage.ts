@@ -9,7 +9,7 @@ export default class RelasjonTilBarnFødselPM {
     constructor() {
         this.erBarnetFødt = TestUtils.getRadioPanelGruppe('barnFødt');
         this.antallBarn = TestUtils.getRadioPanelGruppe('antallBarn');
-        this.fødselsdato = Selector('#fødselsdatoe');
+        this.fødselsdato = Selector('#fødselsdato');
     }
 
     async velgBarnetErFødt(t: TestController, født: boolean) {
