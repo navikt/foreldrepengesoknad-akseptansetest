@@ -11,7 +11,7 @@ const inngangPage = new InngangPage();
 const velkommenPage = new VelkommenPage();
 const relasjonTilBarnetPage = new RelasjonTilBarnFødselPage();
 
-fixture(`Foreldrepengesøknad`).page`https://foreldrepengesoknad-q.nav.no/velkommen`.beforeEach(async t => {
+fixture(`Foreldrepengesøknad`).beforeEach(async t => {
     await t.useRole(loginPage.login(config.fnr_default));
 });
 
