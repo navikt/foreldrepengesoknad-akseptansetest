@@ -32,4 +32,5 @@ test('Fyller ut søknad som mor', async t => {
     await velkommenPage.start(t);
     await inngangPage.fødselMor(t);
     await relasjonTilBarnetPage.caseFødtBarn(t);
+    await t.expect(TestUtils.getPath()).contains('annen-forelder');
 });
