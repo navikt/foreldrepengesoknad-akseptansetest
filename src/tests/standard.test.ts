@@ -31,7 +31,7 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
     await t.useRole(loginPage.login(config.fnr_default));
 });
 
-export const startAndResetSøknad = async t => {
+export const startAndResetSøknad = async (t: TestController) => {
     await TestUtils.waitForInitialDataLoaded();
     const path = await TestUtils.getPath();
     if (path !== '/velkommen') {
@@ -41,17 +41,17 @@ export const startAndResetSøknad = async t => {
 
 test('Verifiser standard søknad', async t => {
     await t.navigateTo(config.url);
-    // await startAndResetSøknad(t);
+    await startAndResetSøknad(t);
 
-    // await velkommenPage.startFørstegangssøknad(t);
-    // await inngangPage.fødselMor(t);
-    // await relasjonTilBarnetPage.fødtBarn(t);
-    // await annenForelderPage.farMedmorDeltOmsorg(t);
-    // await uttaksplanSkjemaPage.standard(t);
-    // await uttaksplanPage.standard(t);
-    // await utenlandsoppholdPage.standard(t);
-    // await arbeidOgInntektPage.standard(t);
-    // await oppsummeringPage.sendSøknad(t);
+    await velkommenPage.startFørstegangssøknad(t);
+    await inngangPage.fødselMor(t);
+    await relasjonTilBarnetPage.fødtBarn(t);
+    await annenForelderPage.farMedmorDeltOmsorg(t);
+    await uttaksplanSkjemaPage.standard(t);
+    await uttaksplanPage.standard(t);
+    await utenlandsoppholdPage.standard(t);
+    await arbeidOgInntektPage.standard(t);
+    await oppsummeringPage.sendSøknad(t);
 
-    // await t.expect(Selector('.søknadSendt').exists).eql(true);
+    await t.expect(Selector('.søknadSendt').exists).eql(true);
 });

@@ -3,12 +3,12 @@ import { Selector } from 'testcafe';
 import { config } from '../../config';
 
 export default class AnnenForelderPage {
-    fornavnInput;
-    etternavnInput;
-    kanIkkOppgisCb;
-    fødselsnummerInput;
-    utenlandskFødselsnummerCb;
-    landSelect;
+    fornavnInput: Selector;
+    etternavnInput: Selector;
+    kanIkkOppgisCb: Selector;
+    fødselsnummerInput: Selector;
+    utenlandskFødselsnummerCb: Selector;
+    landSelect: Selector;
 
     constructor() {
         this.fornavnInput = Selector('input[name="fornavn"]');
@@ -19,11 +19,11 @@ export default class AnnenForelderPage {
         this.landSelect = Selector('select[name="land"]');
     }
 
-    async farMedmorDeltOmsorg(t) {
+    async farMedmorDeltOmsorg(t: TestController) {
         await t
             .typeText(this.fornavnInput, 'Henriette')
             .typeText(this.etternavnInput, 'Ibsen')
-            .typeText(this.fødselsnummerInput, config.fnr_annenForelderKvinne);
+            .typeText(this.fødselsnummerInput, config.fnr_annenForelderKvinne || '12107849597');
         await TestUtils.selectRadio(t, 'omsorgsfordeling', 'nei');
         await TestUtils.selectRadio(t, 'annenForelderRettPåForeldrepenger', 'ja');
         await TestUtils.selectRadio(t, 'erAnnenForelderInformert', 'ja');
