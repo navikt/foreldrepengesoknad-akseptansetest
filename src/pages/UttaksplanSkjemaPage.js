@@ -3,9 +3,9 @@ import { Selector } from 'testcafe';
 import { config } from '../../config';
 
 export default class UttaksplanSkjemaPage {
-    dekningsgradRadio: Selector;
-    permisjonStartdatoInput: Selector;
-    skalIkkeHaUttakCb: Selector;
+    dekningsgradRadio;
+    permisjonStartdatoInput;
+    skalIkkeHaUttakCb;
 
     constructor() {
         this.dekningsgradRadio = TestUtils.getRadioPanelGruppe('dekningsgrad');
@@ -13,7 +13,7 @@ export default class UttaksplanSkjemaPage {
         this.skalIkkeHaUttakCb = Selector('input[name="skalIkkeHaUttakFørTermin"]');
     }
 
-    async standard(t: TestController) {
+    async standard(t) {
         await TestUtils.selectRadioVerdi(t, this.dekningsgradRadio, '100');
         await TestUtils.fortsett(t);
     }

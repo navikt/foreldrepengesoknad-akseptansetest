@@ -31,7 +31,7 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
     await t.useRole(loginPage.login(config.fnr_default));
 });
 
-export const startAndResetSøknad = async (t: TestController) => {
+export const startAndResetSøknad = async t => {
     await TestUtils.waitForInitialDataLoaded();
     const path = await TestUtils.getPath();
     if (path !== '/velkommen') {

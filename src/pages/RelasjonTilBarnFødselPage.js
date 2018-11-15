@@ -3,10 +3,10 @@ import { Selector } from 'testcafe';
 import StegSelectors from '../utils/stegSelectors';
 
 export default class RelasjonTilBarnFødselPM {
-    erBarnetFødt: Selector;
-    antallBarn: Selector;
-    antallBarnSelect: Selector;
-    fødselsdato: Selector;
+    erBarnetFødt;
+    antallBarn;
+    antallBarnSelect;
+    fødselsdato;
 
     constructor() {
         this.erBarnetFødt = TestUtils.getRadioPanelGruppe('barnFødt');
@@ -15,11 +15,11 @@ export default class RelasjonTilBarnFødselPM {
         this.fødselsdato = Selector('#fødselsdato');
     }
 
-    async velgBarnetErFødt(t: TestController, født: boolean) {
+    async velgBarnetErFødt(t, født) {
         await TestUtils.selectRadioVerdi(t, this.erBarnetFødt, født ? 'ja' : 'nei');
     }
 
-    async velgAntallBarn(t: TestController, antall: number = 1) {
+    async velgAntallBarn(t, antall = 1) {
         if (antall <= 3) {
             await TestUtils.selectRadioVerdi(t, this.antallBarn, `${antall}`);
         } else {
@@ -29,11 +29,11 @@ export default class RelasjonTilBarnFødselPM {
         }
     }
 
-    async setFødselsdato(t: TestController, dato?: Date) {
+    async setFødselsdato(t, dato) {
         await TestUtils.setDato(t, this.fødselsdato, dato || new Date());
     }
 
-    async fødtBarn(t: TestController) {
+    async fødtBarn(t) {
         await t.expect(StegSelectors.fortsettKnapp.exists).notOk();
 
         await this.velgBarnetErFødt(t, true);

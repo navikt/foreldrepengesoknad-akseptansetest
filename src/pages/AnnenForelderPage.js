@@ -3,12 +3,12 @@ import { Selector } from 'testcafe';
 import { config } from '../../config';
 
 export default class AnnenForelderPage {
-    fornavnInput: Selector;
-    etternavnInput: Selector;
-    kanIkkOppgisCb: Selector;
-    fødselsnummerInput: Selector;
-    utenlandskFødselsnummerCb: Selector;
-    landSelect: Selector;
+    fornavnInput;
+    etternavnInput;
+    kanIkkOppgisCb;
+    fødselsnummerInput;
+    utenlandskFødselsnummerCb;
+    landSelect;
 
     constructor() {
         this.fornavnInput = Selector('input[name="fornavn"]');
@@ -19,7 +19,7 @@ export default class AnnenForelderPage {
         this.landSelect = Selector('select[name="land"]');
     }
 
-    async farMedmorDeltOmsorg(t: TestController) {
+    async farMedmorDeltOmsorg(t) {
         await t
             .typeText(this.fornavnInput, 'Henriette')
             .typeText(this.etternavnInput, 'Ibsen')

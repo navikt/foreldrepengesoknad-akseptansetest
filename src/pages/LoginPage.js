@@ -12,15 +12,15 @@ export const waitForIDPortenOptionPage = ClientFunction(() => {
 });
 
 class LoginPM {
-    utenIdPortenButton: Selector;
-    usernameField: Selector;
-    passwordField: Selector;
-    nextButton: Selector;
-    signInButtonAzure: Selector;
-    dontShowAgainChecker: Selector;
-    noButton: Selector;
-    fnrField: Selector;
-    signInButtonB2C: Selector;
+    utenIdPortenButton;
+    usernameField;
+    passwordField;
+    nextButton;
+    signInButtonAzure;
+    dontShowAgainChecker;
+    noButton;
+    fnrField;
+    signInButtonB2C;
 
     constructor() {
         this.utenIdPortenButton = Selector('#StubExchange');
@@ -34,7 +34,7 @@ class LoginPM {
         this.signInButtonB2C = Selector('.login');
     }
 
-    login(fnr: string) {
+    login(fnr) {
         return Role(config.login_url, async t => {
             waitForIDPortenOptionPage();
             await t
