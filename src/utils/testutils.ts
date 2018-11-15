@@ -1,5 +1,6 @@
 import { Selector, ClientFunction } from 'testcafe';
 import * as moment from 'moment';
+import StegSelectors from './stegSelectors';
 
 const waitForInitialDataLoaded = ClientFunction(() => {
     return new Promise(resolve => {
@@ -14,47 +15,43 @@ const waitForInitialDataLoaded = ClientFunction(() => {
 const getPath = ClientFunction(() => document.location.pathname);
 
 const avbrytSøknad = async (t: TestController) => {
-    await t.click('.stegFooter button');
+    await t.click(StegSelectors.avbrytSøknadLenke);
     await Selector('.bekreftDialog__bekreftKnapp');
     await t.click('.bekreftDialog__bekreftKnapp');
     await t.expect(getPath()).eql('/velkommen');
 };
 
-const selectRadioVerdi = async (t: TestController, selector: Selector, verdi: string) => {
-    const key = `input[value="${verdi}"]`;
-    const radio = selector.find(`input[value="${verdi}"]`);
+const selectRadioVerdi = async (t: TestController, radiogruppe: Selector, verdi: string) => {
+    const radio = radiogruppe.find(`input[value="${verdi}"]`);
     await t.expect(radio.count).eql(1);
     await t.click(radio);
-    return t;
 };
 
 const selectRadio = async (t: TestController, name: string, value: string | number) => {
-    await t.click(`input[name="${name}"][value="${value}"]`);
+    await t.click(StegSelectors.radioPanelElement(name, value));
 };
 
 const setDato = async (t: TestController, input: Selector, dato: Date) => {
     await t.typeText(input, moment(dato).format('DD.MM.YYYY')).pressKey('tab');
-    return t;
 };
 
 const fortsett = async (t: TestController) => {
-    await t.click(`.fortsettKnapp`);
-    return t;
+    await t.click(StegSelectors.fortsettKnapp);
 };
 
 const getRadioPanelGruppe = (navn: string) => {
-    return Selector(`input[name="${navn}"]`).parent('.radioPanelGruppe');
+    return StegSelectors.radioPanelGruppe(navn);
 };
 
 const TestUtils = {
-    waitForInitialDataLoaded,
+    avbrytSøknad,
     getPath,
+    getRadioPanelGruppe,
+    fortsett,
     selectRadioVerdi,
     selectRadio,
     setDato,
-    avbrytSøknad,
-    getRadioPanelGruppe,
-    fortsett
+    waitForInitialDataLoaded
 };
 
 export default TestUtils;
