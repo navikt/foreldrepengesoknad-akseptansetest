@@ -46,7 +46,7 @@ test('Verifiser standard søknad', async t => {
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
     await relasjonTilBarnetPage.fødtBarn(t);
-    await annenForelderPage.standard(t);
+    await annenForelderPage.farMedmorDeltOmsorg(t);
     await uttaksplanSkjemaPage.standard(t);
     await uttaksplanPage.standard(t);
     await utenlandsoppholdPage.standard(t);

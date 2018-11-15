@@ -34,6 +34,8 @@ export default class RelasjonTilBarnFødselPM {
     }
 
     async fødtBarn(t: TestController) {
+        await t.expect(StegSelectors.fortsettKnapp.exists).notOk();
+
         await this.velgBarnetErFødt(t, true);
         await this.velgAntallBarn(t, 1);
         await this.setFødselsdato(t, new Date());
