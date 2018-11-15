@@ -1,11 +1,13 @@
 import { Selector } from 'testcafe';
+import { ReactSelector } from 'testcafe-react-selectors';
 
 export default class VelkommenPageModel {
     bekreftVilkår: Selector;
     startSøknadKnapp: Selector;
 
     constructor() {
-        this.bekreftVilkår = Selector('.bekreftCheckboksPanel input[type=checkbox]');
+        const bekreftCheckboksPanel = ReactSelector('BekreftCheckboksPanel');
+        this.bekreftVilkår = bekreftCheckboksPanel.find('input[type=checkbox]');
         this.startSøknadKnapp = Selector('.velkommen__startSøknadKnapp');
     }
 

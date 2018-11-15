@@ -10,9 +10,10 @@
     "author": "Team Bris @ NAV",
     "license": "MIT",
     "devDependencies": {
-        "testcafe": "0.23.1"
+        "testcafe": "^0.23.1"
     },
     "dependencies": {
-        "moment": "2.22.2"
+        "moment": "2.22.2",
+        "testcafe-react-selectors": "^3.0.0"
     }
 }
