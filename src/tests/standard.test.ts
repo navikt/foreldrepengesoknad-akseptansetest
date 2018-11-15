@@ -39,7 +39,7 @@ export const startAndResetSøknad = async (t: TestController) => {
     }
 };
 
-test('Fyller ut søknad som mor, fødsel, delt omsorg, foreslått uttaksplan', async t => {
+test('Verifiser standard søknad', async t => {
     await t.navigateTo(config.url);
     await startAndResetSøknad(t);
 
