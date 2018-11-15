@@ -23,7 +23,7 @@ export default class AnnenForelderPage {
         await t
             .typeText(this.fornavnInput, 'Henriette')
             .typeText(this.etternavnInput, 'Ibsen')
-            .typeText(this.fødselsnummerInput, config.fnr_annenForelderKvinne || '12109849462');
+            .typeText(this.fødselsnummerInput, config.fnr_annenForelderKvinne);
         await TestUtils.selectRadio(t, 'omsorgsfordeling', 'nei');
         await TestUtils.selectRadio(t, 'annenForelderRettPåForeldrepenger', 'ja');
         await TestUtils.selectRadio(t, 'erAnnenForelderInformert', 'ja');
