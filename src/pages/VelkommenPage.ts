@@ -17,7 +17,7 @@ export default class VelkommenPageModel {
         await t.click(this.startSøknadKnapp);
     }
 
-    async start(t: TestController) {
+    async startFørstegangssøknad(t: TestController) {
         await this.aksepterVilkår(t);
         await this.clickStartSøknad(t);
     }
