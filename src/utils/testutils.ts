@@ -28,7 +28,7 @@ const selectRadioVerdi = async (t: TestController, selector: Selector, verdi: st
     return t;
 };
 
-const selectRadio = async (t: TestController, name: string, value: string) => {
+const selectRadio = async (t: TestController, name: string, value: string | number) => {
     await t.click(`input[name="${name}"][value="${value}"]`);
 };
 
