@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Ende til endetester for foreldrepengesøknad",
     "scripts": {
-        "test": "$(npm bin)/testcafe --sf -e -S -s . firefox:headless src/tests/**/*.test.ts --proxy webproxy-internett.nav.no:8088 --selector-timeout 3000 --assertion-timeout 5000 --page-load-timeout 5000",
+        "test": "$(npm bin)/testcafe --sf -e -S -s . firefox:headless src/tests/**/*.test.ts --proxy webproxy-internett.nav.no:8088 --selector-timeout 12000 --assertion-timeout 12000 --page-load-timeout 12000",
         "testWithoutProxy": "$(npm bin)/testcafe --sf -e -S -s . firefox:headless src/tests/**/*.test.ts --selector-timeout 5000 --assertion-timeout 5000 --page-load-timeout 5000",
         "testHeadWithoutProxy": "$(npm bin)/testcafe --sf -e -S -s . firefox src/tests/**/*.test.ts --selector-timeout 5000 --assertion-timeout 5000 --page-load-timeout 5000"
     },
