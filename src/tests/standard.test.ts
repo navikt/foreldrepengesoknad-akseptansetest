@@ -31,17 +31,21 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
     await t.useRole(loginPage.login(config.fnr_default));
 });
 
-export const startAndResetSøknad = async (t: TestController) => {
+export const startAndResetSøknad = async (t: TestController, cnt: number) => {
+    await t.navigateTo(config.url);
     await TestUtils.waitForInitialDataLoaded();
-    const path = await TestUtils.getPath();
-    if (path !== '/velkommen') {
+    const path: string = await TestUtils.getPath();
+    if (path.indexOf('soknad') >= 0) {
         await TestUtils.avbrytSøknad(t);
+    } else if (path.indexOf('velkommen') === -1) {
+        if (cnt < 2) {
+            await startAndResetSøknad(t, cnt++);
+        }
     }
 };
 
 test('Verifiser standard søknad', async t => {
-    await t.navigateTo(config.url);
-    await startAndResetSøknad(t);
+    await startAndResetSøknad(t, 0);
 
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
