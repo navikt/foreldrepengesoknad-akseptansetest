@@ -14,6 +14,8 @@ const waitForInitialDataLoaded = ClientFunction(() => {
 
 const getPath = ClientFunction(() => document.location.pathname);
 
+const getHost = ClientFunction(() => document.location.host);
+
 const avbrytSøknad = async (t: TestController) => {
     await t.click(StegSelectors.avbrytSøknadLenke);
     await Selector('.bekreftDialog__bekreftKnapp');
@@ -46,6 +48,7 @@ const getRadioPanelGruppe = (navn: string) => {
 const TestUtils = {
     avbrytSøknad,
     getPath,
+    getHost,
     getRadioPanelGruppe,
     fortsett,
     selectRadioVerdi,

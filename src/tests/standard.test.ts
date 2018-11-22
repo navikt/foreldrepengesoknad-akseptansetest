@@ -29,6 +29,11 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
         return;
     }
     await t.useRole(loginPage.login(config.fnr_default));
+
+    const host = await TestUtils.getHost();
+    if (host && host.indexOf('login.microsoftonline.com') >= 0) {
+        await t.useRole(loginPage.login(config.fnr_default));
+    }
 });
 
 export const startAndResetSøknad = async (t: TestController, cnt: number) => {
@@ -38,7 +43,7 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     if (path.indexOf('soknad') >= 0) {
         await TestUtils.avbrytSøknad(t);
     } else if (path.indexOf('velkommen') === -1) {
-        if (cnt < 2) {
+        if (cnt < 3) {
             await startAndResetSøknad(t, cnt++);
         }
     }
@@ -46,7 +51,6 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
 
 test('Verifiser standard søknad', async t => {
     await startAndResetSøknad(t, 0);
-
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
     await relasjonTilBarnetPage.fødtBarn(t);
@@ -56,6 +60,6 @@ test('Verifiser standard søknad', async t => {
     await utenlandsoppholdPage.standard(t);
     await arbeidOgInntektPage.standard(t);
     await oppsummeringPage.sendSøknad(t);
-
+    await t.wait(15000);
     await t.expect(Selector('.søknadSendt').exists).eql(true);
 });
