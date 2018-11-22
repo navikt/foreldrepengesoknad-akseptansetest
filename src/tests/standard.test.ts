@@ -55,30 +55,21 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     }
 };
 
-test('Test login', async t => {
+test('Reset søknad', async t => {
     await startAndResetSøknad(t, 0);
-    // await velkommenPage.startFørstegangssøknad(t);
-    // await inngangPage.fødselMor(t);
-    // await relasjonTilBarnetPage.fødtBarn(t);
-    // await annenForelderPage.farMedmorDeltOmsorg(t);
-    // await uttaksplanSkjemaPage.standard(t);
-    // await uttaksplanPage.standard(t);
-    // await utenlandsoppholdPage.standard(t);
-    // await arbeidOgInntektPage.standard(t);
-    // await oppsummeringPage.sendSøknad(t);
-    // await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
+    await t.expect(velkommenPage.startSøknadKnapp.exists).eql(true);
 });
 
-// test('Verifiser standard søknad', async t => {
-//     await startAndResetSøknad(t, 0);
-//     await velkommenPage.startFørstegangssøknad(t);
-//     await inngangPage.fødselMor(t);
-//     await relasjonTilBarnetPage.fødtBarn(t);
-//     await annenForelderPage.farMedmorDeltOmsorg(t);
-//     await uttaksplanSkjemaPage.standard(t);
-//     await uttaksplanPage.standard(t);
-//     await utenlandsoppholdPage.standard(t);
-//     await arbeidOgInntektPage.standard(t);
-//     await oppsummeringPage.sendSøknad(t);
-//     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
-// });
+test('Standard søknad mor', async t => {
+    await startAndResetSøknad(t, 0);
+    await velkommenPage.startFørstegangssøknad(t);
+    await inngangPage.fødselMor(t);
+    await relasjonTilBarnetPage.fødtBarn(t);
+    await annenForelderPage.farMedmorDeltOmsorg(t);
+    await uttaksplanSkjemaPage.standard(t);
+    await uttaksplanPage.standard(t);
+    await utenlandsoppholdPage.standard(t);
+    await arbeidOgInntektPage.standard(t);
+    await oppsummeringPage.sendSøknad(t);
+    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
+});
