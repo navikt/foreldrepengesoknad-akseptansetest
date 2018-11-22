@@ -60,6 +60,5 @@ test('Verifiser standard søknad', async t => {
     await utenlandsoppholdPage.standard(t);
     await arbeidOgInntektPage.standard(t);
     await oppsummeringPage.sendSøknad(t);
-    await t.wait(15000);
-    await t.expect(Selector('.søknadSendt').exists).eql(true);
+    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });
