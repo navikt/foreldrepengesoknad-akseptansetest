@@ -38,6 +38,12 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
 
 export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     await t.navigateTo(config.url);
+
+    const host = await TestUtils.getHost();
+    if (host && host.indexOf('login.microsoftonline.com') >= 0) {
+        await t.useRole(loginPage.login(config.fnr_default));
+    }
+
     await TestUtils.waitForInitialDataLoaded();
     const path: string = await TestUtils.getPath();
     if (path.indexOf('soknad') >= 0) {
