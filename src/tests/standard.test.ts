@@ -57,7 +57,7 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
 
 test('Reset søknad', async t => {
     await startAndResetSøknad(t, 0);
-    await t.expect(velkommenPage.startSøknadKnapp.exists).eql(true);
+    await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
 test('Standard søknad mor', async t => {

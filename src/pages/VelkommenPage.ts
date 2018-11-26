@@ -1,12 +1,17 @@
 import { Selector } from 'testcafe';
+import TestUtils from '../utils/testutils';
 
 export default class VelkommenPageModel {
     bekreftVilkår: Selector;
     startSøknadKnapp: Selector;
+    søknadstypeRb: Selector;
+    velkommenTittel: Selector;
 
     constructor() {
         this.bekreftVilkår = Selector('.bekreftCheckboksPanel input[type=checkbox]');
         this.startSøknadKnapp = Selector('.velkommen__startSøknadKnapp');
+        this.søknadstypeRb = Selector('input[name="søknadstype"]');
+        this.velkommenTittel = Selector('.velkommen__tittel');
     }
 
     async aksepterVilkår(t: TestController) {
@@ -18,7 +23,14 @@ export default class VelkommenPageModel {
     }
 
     async startFørstegangssøknad(t: TestController) {
-        await this.aksepterVilkår(t);
-        await this.clickStartSøknad(t);
+        const erEndringssøknad = await this.søknadstypeRb.exists;
+        if (erEndringssøknad) {
+            await TestUtils.selectRadio(t, 'søknadstype', 'nei');
+            await this.aksepterVilkår(t);
+            await this.clickStartSøknad(t);
+        } else {
+            await this.aksepterVilkår(t);
+            await this.clickStartSøknad(t);
+        }
     }
 }
