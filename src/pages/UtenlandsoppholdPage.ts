@@ -30,7 +30,6 @@ export default class UtenlandsoppholdPage {
     private async fjernOpphold(t: TestController, list: Selector) {
         let opphold = await list.find('.interactiveListElement');
         let cnt = 0;
-        console.log(opphold.count);
         while ((await opphold.count) > 0 && cnt < 5) {
             await t.click(Selector('button.interactiveListElement__deleteButton'));
             opphold = await list.find('.interactiveListElement');
