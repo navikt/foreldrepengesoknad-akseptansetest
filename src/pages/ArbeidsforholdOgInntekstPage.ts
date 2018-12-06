@@ -6,6 +6,5 @@ export default class ArbeidsforholdOgInntektPage {
         TestUtils.selectRadio(t, 'harJobbetSomFrilansSiste10Mnd', 'nei');
         TestUtils.selectRadio(t, 'harJobbetSomSelvstendigNæringsdrivendeSiste10Mnd', 'nei');
         TestUtils.selectRadio(t, 'annenInntekt', 'nei');
-        TestUtils.fortsett(t);
     }
 }

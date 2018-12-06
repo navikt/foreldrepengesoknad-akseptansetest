@@ -8,8 +8,7 @@ export default class OppsummeringPage {
         this.bekreftVilkår = Selector('.bekreftCheckboksPanel input[type=checkbox]');
     }
 
-    async sendSøknad(t: TestController) {
+    async aksepterVilkår(t: TestController) {
         await t.click(this.bekreftVilkår);
-        await TestUtils.fortsett(t);
     }
 }

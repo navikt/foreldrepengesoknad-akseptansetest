@@ -29,7 +29,6 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
         return;
     }
     await t.useRole(loginPage.login(config.fnr_default));
-
     const host = await TestUtils.getHost();
     if (host && host.indexOf('login.microsoftonline.com') >= 0) {
         await t.useRole(loginPage.login(config.fnr_default));
@@ -45,6 +44,7 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     }
 
     await TestUtils.waitForInitialDataLoaded();
+    await t.wait(1000); // Wait for redirect if user has temporary storage
     const path: string = await TestUtils.getPath();
     if (path.indexOf('soknad') >= 0) {
         await TestUtils.avbrytSøknad(t);
@@ -60,16 +60,24 @@ test('Reset søknad', async t => {
     await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
-test('Standard søknad mor', async t => {
+test('Komplett førstegangssøknad mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
+    await TestUtils.gåVidere(t);
     await relasjonTilBarnetPage.fødtBarn(t);
+    await TestUtils.gåVidere(t);
     await annenForelderPage.farMedmorDeltOmsorg(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanSkjemaPage.standard(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanPage.standard(t);
-    await utenlandsoppholdPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await utenlandsoppholdPage.medUtenlandsopphold(t);
+    await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
-    await oppsummeringPage.sendSøknad(t);
+    await TestUtils.gåVidere(t);
+    await oppsummeringPage.aksepterVilkår(t);
+    await TestUtils.gåVidere(t);
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });

@@ -27,6 +27,5 @@ export default class AnnenForelderPage {
         await TestUtils.selectRadio(t, 'omsorgsfordeling', 'nei');
         await TestUtils.selectRadio(t, 'annenForelderRettPåForeldrepenger', 'ja');
         await TestUtils.selectRadio(t, 'erAnnenForelderInformert', 'ja');
-        await TestUtils.fortsett(t);
     }
 }

@@ -15,6 +15,5 @@ export default class UttaksplanSkjemaPage {
 
     async standard(t: TestController) {
         await TestUtils.selectRadioVerdi(t, this.dekningsgradRadio, '100');
-        await TestUtils.fortsett(t);
     }
 }

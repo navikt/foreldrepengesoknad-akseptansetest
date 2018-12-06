@@ -41,7 +41,5 @@ export default class RelasjonTilBarnFødselPM {
         await this.setFødselsdato(t, new Date());
 
         await t.expect(StegSelectors.fortsettKnapp.hasAttribute('disabled')).notOk();
-
-        await TestUtils.fortsett(t);
     }
 }

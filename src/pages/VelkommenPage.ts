@@ -14,23 +14,13 @@ export default class VelkommenPageModel {
         this.velkommenTittel = Selector('.velkommen__tittel');
     }
 
-    async aksepterVilkår(t: TestController) {
-        await t.click(this.bekreftVilkår);
-    }
-
-    async clickStartSøknad(t: TestController) {
-        await t.click(this.startSøknadKnapp);
-    }
-
     async startFørstegangssøknad(t: TestController) {
         const erEndringssøknad = await this.søknadstypeRb.exists;
         if (erEndringssøknad) {
             await TestUtils.selectRadio(t, 'søknadstype', 'nei');
-            await this.aksepterVilkår(t);
-            await this.clickStartSøknad(t);
+            await t.click(this.bekreftVilkår).click(this.startSøknadKnapp);
         } else {
-            await this.aksepterVilkår(t);
-            await this.clickStartSøknad(t);
+            await t.click(this.bekreftVilkår).click(this.startSøknadKnapp);
         }
     }
 }
