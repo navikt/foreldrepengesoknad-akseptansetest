@@ -34,7 +34,7 @@ const selectRadio = async (t: TestController, name: string, value: string | numb
 };
 
 const setDato = async (t: TestController, input: Selector, dato: Date) => {
-    await t.typeText(input, moment(dato).format('DD.MM.YYYY')).pressKey('tab');
+    await t.typeText(input, dato ? moment(dato).format('DD.MM.YYYY') : '').pressKey('tab');
 };
 
 const gåVidere = async (t: TestController) => {

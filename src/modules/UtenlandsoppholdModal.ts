@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { Selector } from 'testcafe';
 
-export default class LeggTilUtenlandsopphol {
+export default class UtenlandsoppholdModal {
     dialog: Selector;
     landSelect: Selector;
     fom: Selector;

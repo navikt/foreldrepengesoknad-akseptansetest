@@ -12,6 +12,7 @@ import OppsummeringPage from '../pages/OppsummeringPage';
 
 import { config } from '../../config';
 import { Selector } from 'testcafe';
+import FrilandsBolk from '../modules/FrilansBolk';
 
 const loginPage = new LoginPage();
 const inngangPage = new InngangPage();
@@ -76,8 +77,15 @@ test('Komplett førstegangssøknad mor', async t => {
     await utenlandsoppholdPage.medUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
+    await arbeidOgInntektPage.fyllUtFrilans(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });
+
+// test('Frilans', async t => {
+//     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
+//     const frilansBolk = new FrilandsBolk();
+//     await frilansBolk.fyllUtHarJobbetFrilans(t);
+// });
