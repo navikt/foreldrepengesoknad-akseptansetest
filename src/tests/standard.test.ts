@@ -29,7 +29,6 @@ fixture(`Foreldrepengesøknad`).beforeEach(async t => {
         return;
     }
     await t.useRole(loginPage.login(config.fnr_default));
-
     const host = await TestUtils.getHost();
     if (host && host.indexOf('login.microsoftonline.com') >= 0) {
         await t.useRole(loginPage.login(config.fnr_default));
@@ -45,6 +44,7 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     }
 
     await TestUtils.waitForInitialDataLoaded();
+    await t.wait(1000); // Wait for redirect if user has temporary storage
     const path: string = await TestUtils.getPath();
     if (path.indexOf('soknad') >= 0) {
         await TestUtils.avbrytSøknad(t);
@@ -68,8 +68,28 @@ test('Standard søknad mor', async t => {
     await annenForelderPage.farMedmorDeltOmsorg(t);
     await uttaksplanSkjemaPage.standard(t);
     await uttaksplanPage.standard(t);
-    await utenlandsoppholdPage.standard(t);
+    await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await arbeidOgInntektPage.standard(t);
     await oppsummeringPage.sendSøknad(t);
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
+});
+
+test('Komplett førstegangssøknad mor', async t => {
+    await startAndResetSøknad(t, 0);
+    await velkommenPage.startFørstegangssøknad(t);
+    await inngangPage.fødselMor(t);
+    await relasjonTilBarnetPage.fødtBarn(t);
+    await annenForelderPage.farMedmorDeltOmsorg(t);
+    await uttaksplanSkjemaPage.standard(t);
+    await uttaksplanPage.standard(t);
+    await utenlandsoppholdPage.ingenUtenlandsopphold(t);
+    TestUtils.fortsett(t);
+    await arbeidOgInntektPage.standard(t);
+    await oppsummeringPage.sendSøknad(t);
+    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
+});
+
+test('Utenlandsopphold', async t => {
+    await t.navigateTo('http://localhost:8080/soknad/utenlandsopphold');
+    await utenlandsoppholdPage.medUtenlandsopphold(t);
 });
