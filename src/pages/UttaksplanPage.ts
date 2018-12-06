@@ -8,7 +8,5 @@ export default class UttaksplanPage {
         this.planlegger = Selector('uttaksplanlegger');
     }
 
-    async standard(t: TestController) {
-        await TestUtils.fortsett(t);
-    }
+    async standard(t: TestController) {}
 }

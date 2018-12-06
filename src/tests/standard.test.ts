@@ -64,13 +64,21 @@ test('Standard søknad mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
+    await TestUtils.gåVidere(t);
     await relasjonTilBarnetPage.fødtBarn(t);
+    await TestUtils.gåVidere(t);
     await annenForelderPage.farMedmorDeltOmsorg(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanSkjemaPage.standard(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanPage.standard(t);
+    await TestUtils.gåVidere(t);
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
+    await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
-    await oppsummeringPage.sendSøknad(t);
+    await TestUtils.gåVidere(t);
+    await oppsummeringPage.aksepterVilkår(t);
+    await TestUtils.gåVidere(t);
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });
 
@@ -78,18 +86,20 @@ test('Komplett førstegangssøknad mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
+    await TestUtils.gåVidere(t);
     await relasjonTilBarnetPage.fødtBarn(t);
+    await TestUtils.gåVidere(t);
     await annenForelderPage.farMedmorDeltOmsorg(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanSkjemaPage.standard(t);
+    await TestUtils.gåVidere(t);
     await uttaksplanPage.standard(t);
-    await utenlandsoppholdPage.ingenUtenlandsopphold(t);
-    TestUtils.fortsett(t);
-    await arbeidOgInntektPage.standard(t);
-    await oppsummeringPage.sendSøknad(t);
-    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
-});
-
-test('Utenlandsopphold', async t => {
-    await t.navigateTo('http://localhost:8080/soknad/utenlandsopphold');
+    await TestUtils.gåVidere(t);
     await utenlandsoppholdPage.medUtenlandsopphold(t);
+    await TestUtils.gåVidere(t);
+    await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await oppsummeringPage.aksepterVilkår(t);
+    await TestUtils.gåVidere(t);
+    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });

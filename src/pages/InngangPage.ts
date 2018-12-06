@@ -20,6 +20,5 @@ export default class InngangPageModel {
     async fødselMor(t: TestController) {
         await this.selectSøkersituasjon(t, 'fødsel');
         await this.selectSøkerrolle(t, 'MOR');
-        await TestUtils.fortsett(t);
     }
 }

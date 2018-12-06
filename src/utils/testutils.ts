@@ -37,7 +37,7 @@ const setDato = async (t: TestController, input: Selector, dato: Date) => {
     await t.typeText(input, moment(dato).format('DD.MM.YYYY')).pressKey('tab');
 };
 
-const fortsett = async (t: TestController) => {
+const gåVidere = async (t: TestController) => {
     await t.click(StegSelectors.fortsettKnapp);
 };
 
@@ -50,7 +50,7 @@ const TestUtils = {
     getPath,
     getHost,
     getRadioPanelGruppe,
-    fortsett,
+    gåVidere,
     selectRadioVerdi,
     selectRadio,
     setDato,
