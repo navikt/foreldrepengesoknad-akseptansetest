@@ -60,28 +60,6 @@ test('Reset søknad', async t => {
     await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
-test('Standard søknad mor', async t => {
-    await startAndResetSøknad(t, 0);
-    await velkommenPage.startFørstegangssøknad(t);
-    await inngangPage.fødselMor(t);
-    await TestUtils.gåVidere(t);
-    await relasjonTilBarnetPage.fødtBarn(t);
-    await TestUtils.gåVidere(t);
-    await annenForelderPage.farMedmorDeltOmsorg(t);
-    await TestUtils.gåVidere(t);
-    await uttaksplanSkjemaPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await uttaksplanPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await utenlandsoppholdPage.ingenUtenlandsopphold(t);
-    await TestUtils.gåVidere(t);
-    await arbeidOgInntektPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await oppsummeringPage.aksepterVilkår(t);
-    await TestUtils.gåVidere(t);
-    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
-});
-
 test('Komplett førstegangssøknad mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
