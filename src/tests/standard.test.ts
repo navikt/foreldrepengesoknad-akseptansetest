@@ -14,6 +14,7 @@ import { config } from '../../config';
 import { Selector } from 'testcafe';
 import FrilandsBolk from '../modules/FrilansBolk';
 import SelvstendigNæringsdrivendeBolk from '../modules/SelvstendigN\u00E6ringsdrivendeBolk';
+import AndreInntekterBolk from '../modules/AndreInntekterBolk';
 
 const loginPage = new LoginPage();
 const inngangPage = new InngangPage();
@@ -80,6 +81,7 @@ test('Komplett førstegangssøknad mor', async t => {
     await arbeidOgInntektPage.standard(t);
     await arbeidOgInntektPage.fyllUtFrilans(t);
     await arbeidOgInntektPage.fyllUtSelvstendigNæringsdrivende(t);
+    await arbeidOgInntektPage.fyllUtAnnenInntektJobbIUtlandet(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
@@ -96,4 +98,10 @@ test('Komplett førstegangssøknad mor', async t => {
 //     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
 //     const bolk = new SelvstendigNæringsdrivendeBolk();
 //     await bolk.fyllUtNorskregistrert(t);
+// });
+
+// test('AndreInntekter', async t => {
+//     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
+//     const bolk = new AndreInntekterBolk();
+//     await bolk.fyllUtJobbIUtlandet(t);
 // });
