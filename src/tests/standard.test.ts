@@ -26,7 +26,7 @@ const utenlandsoppholdPage = new UtenlandsoppholdPage();
 const arbeidOgInntektPage = new ArbeidsforholdOgInntektPage();
 const oppsummeringPage = new OppsummeringPage();
 
-fixture(`Foreldrepengesøknad`).beforeEach(async (t) => {
+fixture(`Foreldrepengesøknad`).beforeEach(async t => {
     if (config.skipLogin) {
         return;
     }
@@ -57,12 +57,12 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     }
 };
 
-test('Reset søknad', async (t) => {
+test('Reset søknad', async t => {
     await startAndResetSøknad(t, 0);
     await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
-test('Komplett førstegangssøknad mor', async (t) => {
+test('Komplett førstegangssøknad mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
@@ -86,14 +86,14 @@ test('Komplett førstegangssøknad mor', async (t) => {
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });
 
-test('Frilans', async (t) => {
-    await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
-    const frilansBolk = new FrilandsBolk();
-    await frilansBolk.fyllUtHarJobbetFrilans(t);
-});
+// test('Frilans', async (t) => {
+//     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
+//     const frilansBolk = new FrilandsBolk();
+//     await frilansBolk.fyllUtHarJobbetFrilans(t);
+// });
 
-test('SelvstendigNæringsdrivende', async (t) => {
-    await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
-    const bolk = new SelvstendigNæringsdrivendeBolk();
-    await bolk.fyllUtNorskregistrert(t);
-});
+// test('SelvstendigNæringsdrivende', async (t) => {
+//     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
+//     const bolk = new SelvstendigNæringsdrivendeBolk();
+//     await bolk.fyllUtNorskregistrert(t);
+// });
