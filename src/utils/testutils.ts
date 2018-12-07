@@ -45,7 +45,10 @@ const getRadioPanelGruppe = (navn: string) => {
     return StegSelectors.radioPanelGruppe(navn);
 };
 
+const dateToString = (date: Date): string => moment(date).format('DD.MM.YYYY');
+
 const TestUtils = {
+    dateToString,
     avbrytSøknad,
     getPath,
     getHost,
