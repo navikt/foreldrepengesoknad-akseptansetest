@@ -1,7 +1,5 @@
-import * as moment from 'moment';
 import { Selector } from 'testcafe';
 import TestUtils from '../utils/testutils';
-import StegSelectors from '../utils/stegSelectors';
 
 class FrilandsOppdragDialog {
     dialog: Selector;
@@ -23,10 +21,11 @@ class FrilandsOppdragDialog {
     }
 
     async fyllUt(t: TestController, arbeidsgiver: string, fom: Date, tom: Date) {
-        await t.typeText(this.navnArbeidsgiver, arbeidsgiver);
-        await TestUtils.setDato(t, this.fom, fom);
-        await TestUtils.setDato(t, this.tom, tom);
-        await t.click(this.leggTilBt);
+        await t
+            .typeText(this.navnArbeidsgiver, arbeidsgiver)
+            .typeText(this.fom, TestUtils.dateToString(fom))
+            .typeText(this.tom, TestUtils.dateToString(tom))
+            .click(this.leggTilBt);
     }
 }
 

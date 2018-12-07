@@ -17,28 +17,26 @@ class FrilandsBolk {
     }
 
     private async leggTilOppdrag(t: TestController) {
-        await t.click(this.leggTilOppdragBt);
         const fom = moment()
             .subtract(2, 'months')
             .toDate();
         const tom = moment(fom)
             .add(1, 'months')
             .toDate();
-
         const frilansDialog = new FrilandsOppdragDialog();
+        await t.click(this.leggTilOppdragBt);
         await frilansDialog.fyllUt(t, 'NAV', fom, tom);
     }
 
     private async oppdaterOppdrag(t: TestController) {
-        await t.click(this.bolk.find('.interactiveListElement__editButton'));
         const fom = moment()
             .subtract(5, 'weeks')
             .toDate();
         const tom = moment(fom)
             .add(1, 'weeks')
             .toDate();
-
         const frilansDialog = new FrilandsOppdragDialog();
+        await t.click(this.bolk.find('.interactiveListElement__editButton'));
         await frilansDialog.fyllUt(t, 'Nuupo', fom, tom);
     }
 

@@ -1,5 +1,6 @@
 import TestUtils from '../utils/testutils';
 import FrilandsBolk from '../modules/FrilansBolk';
+import SelvstendigNæringsdrivendeBolk from '../modules/SelvstendigN\u00E6ringsdrivendeBolk';
 
 export default class ArbeidsforholdOgInntektPage {
     async standard(t: TestController) {
@@ -11,5 +12,10 @@ export default class ArbeidsforholdOgInntektPage {
     async fyllUtFrilans(t: TestController) {
         const frilansBolk = new FrilandsBolk();
         await frilansBolk.fyllUtHarJobbetFrilans(t);
+    }
+
+    async fyllUtSelvstendigNæringsdrivende(t: TestController) {
+        const bolk = new SelvstendigNæringsdrivendeBolk();
+        await bolk.fyllUtNorskregistrert(t);
     }
 }
