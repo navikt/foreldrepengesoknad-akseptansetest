@@ -2,7 +2,7 @@ import TestUtils from '../utils/testutils';
 import LoginPage from '../pages/LoginPage';
 import InngangPage from '../pages/InngangPage';
 import VelkommenPage from '../pages/VelkommenPage';
-import RelasjonTilBarnFødselPage from '../pages/RelasjonTilBarnFødselPage';
+import RelasjonTilBarnPage from '../pages/RelasjonTilBarnPage';
 import AnnenForelderPage from '../pages/AnnenForelderPage';
 import UttaksplanSkjemaPage from '../pages/UttaksplanSkjemaPage';
 import UttaksplanPage from '../pages/UttaksplanPage';
@@ -12,14 +12,11 @@ import OppsummeringPage from '../pages/OppsummeringPage';
 
 import { config } from '../../config';
 import { Selector } from 'testcafe';
-import FrilandsBolk from '../modules/FrilansBolk';
-import SelvstendigNæringsdrivendeBolk from '../modules/SelvstendigN\u00E6ringsdrivendeBolk';
-import AndreInntekterBolk from '../modules/AndreInntekterBolk';
 
 const loginPage = new LoginPage();
 const inngangPage = new InngangPage();
 const velkommenPage = new VelkommenPage();
-const relasjonTilBarnetPage = new RelasjonTilBarnFødselPage();
+const relasjonTilBarnPage = new RelasjonTilBarnPage();
 const annenForelderPage = new AnnenForelderPage();
 const uttaksplanSkjemaPage = new UttaksplanSkjemaPage();
 const uttaksplanPage = new UttaksplanPage();
@@ -63,12 +60,12 @@ test('Reset søknad', async t => {
     await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
-test('Komplett førstegangssøknad mor', async t => {
+test('Komplett førstegangssøknad fødsel mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
     await TestUtils.gåVidere(t);
-    await relasjonTilBarnetPage.fødtBarn(t);
+    await relasjonTilBarnPage.fødtBarn(t);
     await TestUtils.gåVidere(t);
     await annenForelderPage.farMedmorDeltOmsorg(t);
     await TestUtils.gåVidere(t);
@@ -87,6 +84,19 @@ test('Komplett førstegangssøknad mor', async t => {
     await TestUtils.gåVidere(t);
     await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
 });
+
+test('Adopsjon utenlands', async t => {
+    await startAndResetSøknad(t, 0);
+    await velkommenPage.startFørstegangssøknad(t);
+    await inngangPage.adopsjonMor(t);
+    await TestUtils.gåVidere(t);
+    await relasjonTilBarnPage.fødtBarnAdopsjon(t);
+});
+
+// test('Adopsjon singletest', async t => {
+//     await t.navigateTo('http://localhost:8080/soknad/relasjon-til-barn-adopsjon');
+//     await relasjonTilBarnPage.fødtBarnAdopsjon(t);
+// });
 
 // test('Frilans', async (t) => {
 //     await t.navigateTo('http://localhost:8080/soknad/andre-inntekter');
