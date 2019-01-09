@@ -21,6 +21,11 @@ export default class InngangPageModel {
         await this.selectSøkersituasjon(t, 'fødsel');
         await this.selectSøkerrolle(t, 'MOR');
     }
+
+    async fødselFar(t: TestController) {
+        await this.selectSøkersituasjon(t, 'fødsel');
+    }
+
     async adopsjonMor(t: TestController) {
         await this.selectSøkersituasjon(t, 'adopsjon');
     }
