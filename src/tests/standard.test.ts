@@ -24,23 +24,27 @@ const utenlandsoppholdPage = new UtenlandsoppholdPage();
 const arbeidOgInntektPage = new ArbeidsforholdOgInntektPage();
 const oppsummeringPage = new OppsummeringPage();
 
-fixture(`Foreldrepengesøknad`).beforeEach(async t => {
+fixture(`Foreldrepengesøknad`);
+
+const setParent = async (t: TestController, fnr: string) => {
     if (config.skipLogin) {
         return;
     }
-    await t.useRole(loginPage.login(config.fnr_default));
+
+    await t.useRole(loginPage.login(fnr));
     const host = await TestUtils.getHost();
+
     if (host && host.indexOf('login.microsoftonline.com') >= 0) {
-        await t.useRole(loginPage.login(config.fnr_default));
+        await t.useRole(loginPage.login(fnr));
     }
-});
+};
 
 export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     await t.navigateTo(config.url);
 
     const host = await TestUtils.getHost();
     if (host && host.indexOf('login.microsoftonline.com') >= 0) {
-        await t.useRole(loginPage.login(config.fnr_default));
+        await t.useRole(loginPage.login(config.fnr_default_mor));
     }
 
     await TestUtils.waitForInitialDataLoaded();
@@ -55,12 +59,17 @@ export const startAndResetSøknad = async (t: TestController, cnt: number) => {
     }
 };
 
-test('Reset søknad', async t => {
-    await startAndResetSøknad(t, 0);
-    await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
-});
+test.before(async t => setParent(t, config.fnr_default_mor))(
+    'Reset søknad',
+    async t => {
+        await startAndResetSøknad(t, 0);
+        await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
+    }
+);
 
-test('Komplett førstegangssøknad fødsel mor', async t => {
+test.before(async t => {
+    return setParent(t, config.fnr_default_mor);
+})('Komplett førstegangssøknad fødsel mor', async t => {
     await startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
@@ -82,16 +91,52 @@ test('Komplett førstegangssøknad fødsel mor', async t => {
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
-    await t.expect(Selector('.søknadSendt', { timeout: 20000 }).exists).eql(true);
+    await t
+        .expect(Selector('.søknadSendt', { timeout: 20000 }).exists)
+        .eql(true);
 });
 
-test('Adopsjon utenlands', async t => {
-    await startAndResetSøknad(t, 0);
-    await velkommenPage.startFørstegangssøknad(t);
-    await inngangPage.adopsjonMor(t);
-    await TestUtils.gåVidere(t);
-    await relasjonTilBarnPage.fødtBarnAdopsjon(t);
-});
+test.before(async t => setParent(t, config.fnr_default_farmedmor))(
+    'Komplett førstegangssøknad fødsel far',
+    async t => {
+        await startAndResetSøknad(t, 0);
+        await velkommenPage.startFørstegangssøknad(t);
+        await inngangPage.fødselFar(t);
+        await TestUtils.gåVidere(t);
+        await relasjonTilBarnPage.fødtBarn(t);
+        await TestUtils.gåVidere(t);
+        await annenForelderPage.farMedmorDeltOmsorg(t);
+        await TestUtils.gåVidere(t);
+        await uttaksplanSkjemaPage.standard(t);
+        await TestUtils.gåVidere(t);
+        await uttaksplanPage.standard(t);
+        await uttaksplanPage.fyllUtFar(t);
+        await TestUtils.gåVidere(t);
+        await utenlandsoppholdPage.medUtenlandsopphold(t);
+        await TestUtils.gåVidere(t);
+        await arbeidOgInntektPage.standard(t);
+        await arbeidOgInntektPage.fyllUtFrilans(t);
+        await arbeidOgInntektPage.fyllUtSelvstendigNæringsdrivende(t);
+        await arbeidOgInntektPage.fyllUtAnnenInntektJobbIUtlandet(t);
+        await TestUtils.gåVidere(t);
+        await oppsummeringPage.aksepterVilkår(t);
+        await TestUtils.gåVidere(t);
+        await t
+            .expect(Selector('.søknadSendt', { timeout: 20000 }).exists)
+            .eql(true);
+    }
+);
+
+test.before(async t => setParent(t, config.fnr_default_mor))(
+    'Adopsjon utenlands',
+    async t => {
+        await startAndResetSøknad(t, 0);
+        await velkommenPage.startFørstegangssøknad(t);
+        await inngangPage.adopsjonMor(t);
+        await TestUtils.gåVidere(t);
+        await relasjonTilBarnPage.fødtBarnAdopsjon(t);
+    }
+);
 
 // test('Adopsjon singletest', async t => {
 //     await t.navigateTo('http://localhost:8080/soknad/relasjon-til-barn-adopsjon');
