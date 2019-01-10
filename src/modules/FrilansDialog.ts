@@ -11,13 +11,13 @@ class FrilandsOppdragDialog {
     avbrytBt: Selector;
 
     constructor() {
-        this.dialog = Selector('.frilansOppdragModal');
+        this.dialog = Selector('.modalForm');
         this.navnArbeidsgiver = this.dialog.find('input[name="oppdragsgiverNavn"]');
         this.fom = this.dialog.find('input[name="fraDatoInput"]');
         this.tom = this.dialog.find('input[name="tilDatoInput"]');
         this.pågåendeCheck = this.dialog.find('input[name="pågåendeOppdrag"]');
         this.avbrytBt = this.dialog.find('button[data-name="avbryt"]');
-        this.leggTilBt = this.dialog.find('button[data-name="leggTil"]');
+        this.leggTilBt = this.dialog.find('.modalForm__submitButton');
     }
 
     async fyllUt(t: TestController, arbeidsgiver: string, fom: Date, tom: Date) {
