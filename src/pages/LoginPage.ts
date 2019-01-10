@@ -35,7 +35,7 @@ class LoginPM {
     }
 
     login(fnr: string) {
-        return Role(config.login_url, async t => {
+        return Role(config.url, async t => {
             waitForIDPortenOptionPage();
             await t
                 .click(this.utenIdPortenButton)
