@@ -3,7 +3,7 @@ import { Selector } from 'testcafe';
 import TestUtils from '../utils/testutils';
 import FrilandsOppdragDialog from './FrilansDialog';
 
-class FrilandsBolk {
+class FrilansBolk {
     bolk: Selector;
     startetDato: Selector;
     leggTilOppdragBt: Selector;
@@ -84,4 +84,4 @@ class FrilandsBolk {
     }
 }
 
-export default FrilandsBolk;
+export default FrilansBolk;

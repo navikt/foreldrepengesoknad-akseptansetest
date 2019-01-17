@@ -18,7 +18,7 @@ export default class RelasjonTilBarnPage {
     antallBarn: Selector;
     antallBarnSelect: Selector;
     fødselsdato: Selector;
-
+    termindato: Selector;
     ettBarn: Selector;
 
     constructor() {
@@ -26,6 +26,7 @@ export default class RelasjonTilBarnPage {
         this.antallBarn = TestUtils.getRadioPanelGruppe('antallBarn');
         this.antallBarnSelect = Selector('select[name="antallBarnSelect"]');
         this.fødselsdato = Selector('#fødselsdato');
+        this.termindato = Selector('input[name="termindato"]');
 
         this.ettBarn = StegSelectors.radioPanelElement('antallBarn', '1');
 
@@ -56,6 +57,10 @@ export default class RelasjonTilBarnPage {
 
     async setFødselsdato(t: TestController, dato?: Date) {
         await TestUtils.setDato(t, this.fødselsdato, dato || new Date());
+    }
+
+    async setTermindato(t: TestController, dato?: Date) {
+        await TestUtils.setDato(t, this.termindato, dato || new Date());
     }
 
     async fødtBarn(t: TestController) {
