@@ -5,7 +5,8 @@
     "scripts": {
         "test": "$(npm bin)/testcafe --sf -e -S -s . chrome:headless src/tests/**/*.test.ts --proxy webproxy-internett.nav.no:8088 --selector-timeout 20000 --assertion-timeout 20000 --page-load-timeout 20000",
         "testWithoutProxy": "$(npm bin)/testcafe --sf -e -S -s . chrome:headless src/tests/**/*.test.ts --selector-timeout 20000 --assertion-timeout 20000 --page-load-timeout 20000",
-        "testHeadWithoutProxy": "$(npm bin)/testcafe --sf -e -S -s . chrome src/tests/**/*.test.ts --selector-timeout 20000 --assertion-timeout 20000 --page-load-timeout 20000"
+        "testHeadWithoutProxy": "$(npm bin)/testcafe --sf -e -S -s . chrome src/tests/**/*.test.ts --selector-timeout 20000 --assertion-timeout 20000 --page-load-timeout 20000",
+        "testLocal": "npm run testHeadWithoutProxy"
     },
     "author": "Team Bris @ NAV",
     "license": "MIT",
