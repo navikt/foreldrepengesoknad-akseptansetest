@@ -24,12 +24,12 @@ const oppsummeringPage = new OppsummeringPage();
 
 fixture(`Standardsøknader`);
 
-test.before(async t => TestUtils.setParent(t, config.fnr_default_mor))('Reset søknad', async t => {
+test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Reset søknad', async (t) => {
     await TestUtils.startAndResetSøknad(t, 0);
     await t.expect(velkommenPage.velkommenTittel.exists).eql(true);
 });
 
-test.before(async t => TestUtils.setParent(t, config.fnr_default_mor))('Standardmor', async t => {
+test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Standardmor', async (t) => {
     await TestUtils.startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);

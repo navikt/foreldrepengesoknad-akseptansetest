@@ -23,9 +23,9 @@ const oppsummeringPage = new OppsummeringPage();
 
 fixture(`Komplette søknader`);
 
-test.before(async t => {
+test.before(async (t) => {
     return TestUtils.setParent(t, config.fnr_default_mor);
-})('Komplett førstegangssøknad fødsel mor', async t => {
+})('Komplett førstegangssøknad fødsel mor', async (t) => {
     await TestUtils.startAndResetSøknad(t, 0);
     await velkommenPage.startFørstegangssøknad(t);
     await inngangPage.fødselMor(t);
@@ -50,9 +50,9 @@ test.before(async t => {
     await TestUtils.ventPåKvittering(t);
 });
 
-test.before(async t => TestUtils.setParent(t, config.fnr_default_farmedmor))(
+test.before(async (t) => TestUtils.setParent(t, config.fnr_default_farmedmor))(
     'Komplett førstegangssøknad fødsel far',
-    async t => {
+    async (t) => {
         await TestUtils.startAndResetSøknad(t, 0);
         await velkommenPage.startFørstegangssøknad(t);
         await inngangPage.fødselFar(t);

@@ -32,15 +32,12 @@ export default class RelasjonTilBarnPage {
 
         this.adopsjon = {
             fødselsdatoerFlere0: Selector('input[name="fødselsdatoer.flere.0"]'),
-            gjelderStebarnsadopsjonNei: StegSelectors.radioPanelElement(
-                'adopsjonAvEktefellesBarn',
-                'nei'
-            ),
+            gjelderStebarnsadopsjonNei: StegSelectors.radioPanelElement('adopsjonAvEktefellesBarn', 'nei'),
             adopsjonsdato: Selector('#adopsjonsdato'),
             adoptertIUtlandetJa: StegSelectors.radioPanelElement('adoptertIUtlandet', 'ja'),
             adoptertIUtlandetNei: StegSelectors.radioPanelElement('adoptertIUtlandet', 'Nei'),
             ankomstdato: Selector('#ankomstdato'),
-            feilAnkomstdato: Selector('.feil-oppsummering-boks a[href="#ankomstdato"]'),
+            feilAnkomstdato: Selector('.feil-oppsummering-boks a[href="#ankomstdato"]')
         };
     }
 
@@ -106,8 +103,6 @@ export default class RelasjonTilBarnPage {
 
         await t.expect(adopsjon.feilAnkomstdato.exists).ok();
 
-        await t
-            .typeText(adopsjon.ankomstdato, TestUtils.dateToString(ankomstdatoAfterFødselsdato))
-            .pressKey('tab');
+        await t.typeText(adopsjon.ankomstdato, TestUtils.dateToString(ankomstdatoAfterFødselsdato)).pressKey('tab');
     }
 }

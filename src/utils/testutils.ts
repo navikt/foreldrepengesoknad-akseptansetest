@@ -7,7 +7,7 @@ import LoginPage from '../pages/LoginPage';
 const loginPage = new LoginPage();
 
 const waitForInitialDataLoaded = ClientFunction(() => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         window.setInterval(() => {
             if (document.location.pathname !== '/') {
                 resolve();
@@ -46,9 +46,7 @@ const selectRangeValue = async (t: TestController, rangeContainer: Selector, ver
     }
 
     const increaseButton = await rangeContainer.find('.rangeInput__stepper--next').find('button');
-    const decreaseButton = await rangeContainer
-        .find('.rangeInput__stepper--previous')
-        .find('button');
+    const decreaseButton = await rangeContainer.find('.rangeInput__stepper--previous').find('button');
 
     const sign = currentValue < verdi ? +1 : -1;
     const absoluteDifference = (verdi - currentValue) * sign;
@@ -123,7 +121,7 @@ const TestUtils = {
     setParent,
     startAndResetSøknad,
     waitForInitialDataLoaded,
-    ventPåKvittering,
+    ventPåKvittering
 };
 
 export default TestUtils;
