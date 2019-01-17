@@ -8,11 +8,9 @@ node {
     }
 
     stage('Checkout') {
-        withCredentials([string(credentialsId: 'OAUTH_TOKEN', variable: 'token')]) {
-           withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
-            sh 'git clone https://${token}:x-oauth-basic@github.com/navikt/foreldrepengesoknad-akseptansetest.git .'
-           }
-         }
+      withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
+        sh 'git clone https://github.com/navikt/foreldrepengesoknad-akseptansetest.git .'
+      }
     }
 
     stage('Setup') {
