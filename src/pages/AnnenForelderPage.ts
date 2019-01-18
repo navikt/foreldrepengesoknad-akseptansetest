@@ -19,6 +19,10 @@ export default class AnnenForelderPage {
         this.landSelect = Selector('select[name="land"]');
     }
 
+    async kanIkkeOppgi(t: TestController) {
+        await t.click(this.kanIkkOppgisCb);
+    }
+
     async enterMorsPersonalia(t: TestController) {
         await t
             .typeText(this.fornavnInput, 'Henriette')

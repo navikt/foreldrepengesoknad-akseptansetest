@@ -22,4 +22,9 @@ export default class UttaksplanSkjemaPage {
     async velgAntallUkerFelles(t: TestController, antallUker: number) {
         await TestUtils.selectRangeValue(t, this.fellesperiodeRange, antallUker);
     }
+
+    async velgPeriodestart(t: TestController, periodestart: Date) {
+        const førsteArbeidsdagEtterStart = TestUtils.skipWeekend(periodestart);
+        await TestUtils.setDato(t, this.permisjonStartdatoInput, førsteArbeidsdagEtterStart);
+    }
 }

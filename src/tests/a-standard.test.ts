@@ -103,3 +103,38 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_far))('Far og
     await TestUtils.gåVidere(t);
     await TestUtils.ventPåKvittering(t);
 });
+
+test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Alenemor med tre uker ferie', async (t) => {
+    const terminOmFireUker = moment()
+        .add(4, 'weeks')
+        .toDate();
+
+    const treUkerFørTermin = moment()
+        .add(1, 'week')
+        .toDate();
+
+    const førsteDagMedFerie = moment(terminOmFireUker)
+        .add(6, 'weeks')
+        .toDate();
+
+    await TestUtils.startAndResetSøknad(t, 0);
+    await velkommenPage.startFørstegangssøknad(t);
+    await inngangPage.fødselMor(t);
+    await TestUtils.gåVidere(t);
+    await relasjonTilBarnPage.ufødtBarn(t, terminOmFireUker);
+    await TestUtils.gåVidere(t);
+    await annenForelderPage.kanIkkeOppgi(t);
+    await TestUtils.gåVidere(t);
+    await uttaksplanSkjemaPage.standard(t);
+    await uttaksplanSkjemaPage.velgPeriodestart(t, treUkerFørTermin);
+    await TestUtils.gåVidere(t);
+    await uttaksplanPage.uttaksplan.leggInnFerie(t, førsteDagMedFerie, 3);
+    await TestUtils.gåVidere(t);
+    await utenlandsoppholdPage.ingenUtenlandsopphold(t);
+    await TestUtils.gåVidere(t);
+    await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await oppsummeringPage.aksepterVilkår(t);
+    await TestUtils.gåVidere(t);
+    await TestUtils.ventPåKvittering(t);
+});

@@ -4,23 +4,31 @@ import TestUtils from '../utils/testutils';
 
 class Uttaksplan {
     openNyPeriodeForm: Selector;
+    utsettEnPeriodeForm: Selector;
     fomInput: Selector;
     tomInput: Selector;
     kvote: Selector;
+    årsakTilUtsettelse: Selector;
     samtidigUttak: Selector;
     gradertUttak: Selector;
     aktivitetskravInput: Selector;
     leggTilPeriodeKnapp: Selector;
+    lukkEndrePeriodeKnapp: Selector;
 
     constructor() {
         this.openNyPeriodeForm = Selector('button[data-name="openNyPeriodeForm"]');
+        this.utsettEnPeriodeForm = Selector('.knapperad')
+            .find('.knapp')
+            .nth(0);
         this.leggTilPeriodeKnapp = Selector('button[data-name="leggTilPeriode"]');
         this.fomInput = Selector('input[name="fraDatoInput"]');
         this.tomInput = Selector('input[name="tilDatoInput"]');
         this.kvote = TestUtils.getRadioPanelGruppe('kvote');
+        this.årsakTilUtsettelse = TestUtils.getRadioPanelGruppe('årsakTilUtsettelse');
         this.samtidigUttak = TestUtils.getRadioPanelGruppe('samtidigUttak');
         this.aktivitetskravInput = Selector('select[name="hvaSkalMorGjøre.spørsmål"]');
         this.gradertUttak = TestUtils.getRadioPanelGruppe('ønskerDuGradertUttak');
+        this.lukkEndrePeriodeKnapp = Selector('button.endreperiodeForm__lukkPeriode');
     }
 
     async selectKvote(t: TestController, kvote: string) {
@@ -33,6 +41,10 @@ class Uttaksplan {
 
     async selectGradering(t: TestController, gradering: string) {
         await TestUtils.selectRadioVerdi(t, this.gradertUttak, gradering);
+    }
+
+    async selectÅrsakTilUtsettelse(t: TestController, årsak: string) {
+        await TestUtils.selectRadioVerdi(t, this.årsakTilUtsettelse, årsak);
     }
 
     async selectAkvititetskrav(t: TestController, aktivitet: string) {
@@ -93,6 +105,21 @@ class Uttaksplan {
         await this.selectKvote(t, 'FEDREKVOTE');
         await this.selectSamtidigUttak(t, 'nei');
         await this.selectGradering(t, 'nei');
+        await t.click(this.leggTilPeriodeKnapp);
+    }
+
+    /*
+     * Obs! Tar ikke høyde for helligdager, så perioden kan bli mindre enn <antallUker>.
+     */
+    async leggInnFerie(t: TestController, førsteDagMedFerie: Date, antallUker: number) {
+        const førsteDag: Date = TestUtils.skipWeekend(førsteDagMedFerie);
+        let sisteDag: Date = moment(førsteDag)
+            .add(antallUker, 'weeks')
+            .toDate();
+
+        await t.click(this.utsettEnPeriodeForm);
+        await this.skrivInnDatoer(t, førsteDag, sisteDag);
+        await this.selectÅrsakTilUtsettelse(t, 'ferie');
         await t.click(this.leggTilPeriodeKnapp);
     }
 }

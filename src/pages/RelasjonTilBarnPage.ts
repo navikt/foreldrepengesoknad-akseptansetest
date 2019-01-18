@@ -73,12 +73,12 @@ export default class RelasjonTilBarnPage {
         await t.expect(StegSelectors.fortsettKnapp.hasAttribute('disabled')).notOk();
     }
 
-    async ufødtBarn(t: TestController) {
+    async ufødtBarn(t: TestController, termindato?: Date) {
         await t.expect(StegSelectors.fortsettKnapp.exists).notOk();
 
         await this.velgBarnetErFødt(t, false);
         await this.velgAntallBarn(t, 1);
-        await this.setTermindato(t);
+        await this.setTermindato(t, termindato || new Date());
 
         await t.expect(StegSelectors.fortsettKnapp.hasAttribute('disabled')).notOk();
     }
