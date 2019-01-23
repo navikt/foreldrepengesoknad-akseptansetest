@@ -19,11 +19,26 @@ export default class AnnenForelderPage {
         this.landSelect = Selector('select[name="land"]');
     }
 
-    async farMedmorDeltOmsorg(t: TestController) {
+    async kanIkkeOppgi(t: TestController) {
+        await t.click(this.kanIkkOppgisCb);
+    }
+
+    async enterMorsPersonalia(t: TestController) {
         await t
             .typeText(this.fornavnInput, 'Henriette')
             .typeText(this.etternavnInput, 'Ibsen')
             .typeText(this.fødselsnummerInput, config.fnr_annenForelderKvinne || '12107849597');
+    }
+
+    async bareFarMedmorHarRett(t: TestController) {
+        await this.enterMorsPersonalia(t);
+        await TestUtils.selectRadio(t, 'omsorgsfordeling', 'nei');
+        await TestUtils.selectRadio(t, 'annenForelderRettPåForeldrepenger', 'nei');
+        await TestUtils.selectRadio(t, 'erMorUfør', 'nei');
+    }
+
+    async farMedmorDeltOmsorg(t: TestController) {
+        await this.enterMorsPersonalia(t);
         await TestUtils.selectRadio(t, 'omsorgsfordeling', 'nei');
         await TestUtils.selectRadio(t, 'annenForelderRettPåForeldrepenger', 'ja');
         await TestUtils.selectRadio(t, 'erAnnenForelderInformert', 'ja');

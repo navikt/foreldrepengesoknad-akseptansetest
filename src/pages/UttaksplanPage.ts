@@ -4,15 +4,16 @@ import Uttaksplan from '../modules/Uttaksplan';
 
 export default class UttaksplanPage {
     planlegger: Selector;
+    uttaksplan: Uttaksplan;
 
     constructor() {
         this.planlegger = Selector('uttaksplanlegger');
+        this.uttaksplan = new Uttaksplan();
     }
 
     async standard(t: TestController) {}
 
     async fyllUtFar(t: TestController) {
-        const uttaksplan = new Uttaksplan();
-        await uttaksplan.leggTilPeriode(t);
+        await this.uttaksplan.leggTilPeriodeForFar(t);
     }
 }

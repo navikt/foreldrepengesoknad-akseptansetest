@@ -37,6 +37,13 @@ const selectRadio = async (t: TestController, name: string, value: string | numb
     await t.click(StegSelectors.radioPanelElement(name, value));
 };
 
+const selectDropdown = async (t: TestController, dropdown: Selector, value: string) => {
+    const option = dropdown.find(`option[value="${value}"]`);
+
+    await t.click(dropdown);
+    await t.click(option);
+};
+
 const selectRangeValue = async (t: TestController, rangeContainer: Selector, verdi: number) => {
     const rangeInput = await rangeContainer.find('input');
     const currentValue = parseInt(await rangeInput.value);
@@ -69,6 +76,26 @@ const getRadioPanelGruppe = (navn: string) => {
 };
 
 const dateToString = (date: Date): string => moment(date).format('DD.MM.YYYY');
+
+const skipWeekend = (date: Date) => {
+    const dayOfWeek = moment(date).isoWeekday();
+
+    return dayOfWeek === 6 || dayOfWeek === 7
+        ? moment(date)
+              .add(dayOfWeek === 6 ? 2 : 1, 'days')
+              .toDate()
+        : date;
+};
+
+const rewindToBeforeWeekend = (date: Date) => {
+    const dayOfWeek = moment(date).isoWeekday();
+
+    return dayOfWeek === 6 || dayOfWeek === 7
+        ? moment(date)
+              .subtract(dayOfWeek === 6 ? 1 : 2, 'days')
+              .toDate()
+        : date;
+};
 
 const setParent = async (t: TestController, fnr: string) => {
     if (config.skipLogin) {
@@ -116,7 +143,10 @@ const TestUtils = {
     gåVidere,
     selectRadioVerdi,
     selectRadio,
+    selectDropdown,
     selectRangeValue,
+    skipWeekend,
+    rewindToBeforeWeekend,
     setDato,
     setParent,
     startAndResetSøknad,
