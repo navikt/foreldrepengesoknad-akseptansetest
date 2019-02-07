@@ -14,6 +14,7 @@ class Uttaksplan {
     aktivitetskravInput: Selector;
     leggTilPeriodeKnapp: Selector;
     lukkEndrePeriodeKnapp: Selector;
+    periodenGjelder: Selector;
 
     constructor() {
         this.openNyPeriodeForm = Selector('button[data-name="openNyPeriodeForm"]');
@@ -29,6 +30,7 @@ class Uttaksplan {
         this.aktivitetskravInput = Selector('select[name="hvaSkalMorGjøre.spørsmål"]');
         this.gradertUttak = TestUtils.getRadioPanelGruppe('ønskerDuGradertUttak');
         this.lukkEndrePeriodeKnapp = Selector('button.endreperiodeForm__lukkPeriode');
+        this.periodenGjelder = TestUtils.getRadioPanelGruppe('periodenGjelder');
     }
 
     async selectKvote(t: TestController, kvote: string) {
@@ -49,6 +51,10 @@ class Uttaksplan {
 
     async selectAkvititetskrav(t: TestController, aktivitet: string) {
         await TestUtils.selectDropdown(t, this.aktivitetskravInput, aktivitet);
+    }
+
+    async selectPeriodenGjelder(t: TestController, forelder: string) {
+        await TestUtils.selectRadioVerdi(t,this.periodenGjelder, forelder);
     }
 
     async leggInnAntallUker(t: TestController, antallUker: number, startDato: Date = new Date()) {
@@ -74,6 +80,7 @@ class Uttaksplan {
 
         await t.click(this.openNyPeriodeForm);
         await this.skrivInnDatoer(t, førsteUttaksDato, sisteUttaksDato);
+        await this.selectPeriodenGjelder(t, 'farMedmor');
         await this.selectKvote(t, 'FEDREKVOTE');
         await this.selectSamtidigUttak(t, 'nei');
         await this.selectGradering(t, 'nei');
@@ -102,6 +109,7 @@ class Uttaksplan {
 
         await t.click(this.openNyPeriodeForm);
         await this.skrivInnDatoer(t, førsteUttaksDato, sisteUttaksDato);
+        await this.selectPeriodenGjelder(t, 'farMedmor');
         await this.selectKvote(t, 'FEDREKVOTE');
         await this.selectSamtidigUttak(t, 'nei');
         await this.selectGradering(t, 'nei');
