@@ -90,7 +90,6 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_far))('Far og
     await TestUtils.gåVidere(t);
     await t.click(uttaksplanPage.uttaksplan.openNyPeriodeForm);
     await uttaksplanPage.uttaksplan.leggInnAntallUker(t, 20, førsteUttaksdato);
-    await uttaksplanPage.uttaksplan.selectKvote(t, 'FORELDREPENGER');
     await uttaksplanPage.uttaksplan.selectAkvititetskrav(t, 'UTDANNING');
     await uttaksplanPage.uttaksplan.selectGradering(t, 'nei');
     await t.click(uttaksplanPage.uttaksplan.leggTilPeriodeKnapp);
