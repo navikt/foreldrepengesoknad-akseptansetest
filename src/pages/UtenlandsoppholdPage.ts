@@ -65,12 +65,10 @@ export default class UtenlandsoppholdPage {
     async ingenUtenlandsopphold(t: TestController) {
         await TestUtils.selectRadio(t, 'boddINorgeSiste12Mnd', 'ja');
         await TestUtils.selectRadio(t, 'iNorgeNeste12Mnd', 'ja');
-        await TestUtils.selectRadio(t, 'iNorgePåHendelsestidspunktet', 'ja');
     }
 
     async medUtenlandsopphold(t: TestController) {
         await this.leggTilTidligereUtenlandsoppholdPart(t);
         await this.leggTilSenereUtenlandsoppholdPart(t);
-        await TestUtils.selectRadio(t, 'iNorgePåHendelsestidspunktet', 'ja');
     }
 }
