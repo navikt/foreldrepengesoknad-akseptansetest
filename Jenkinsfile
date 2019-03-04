@@ -37,7 +37,7 @@ node {
         } catch (Exception ex) {
             slackSend([
                     color  : 'danger',
-                    message: "Akseptansetesten(e) for foreldrepengesøknad feilet :thumbsdown: \nSjekk status på $env.BUILD_URL :poop:"
+                    message: "@here Akseptansetesten(e) for foreldrepengesøknad feilet :thumbsdown: \nSjekk status på $env.BUILD_URL :poop:"
             ])
             throw new Exception("Akseptansetesten(e) for foreldrepengesøknad feilet", ex)
         } finally {
