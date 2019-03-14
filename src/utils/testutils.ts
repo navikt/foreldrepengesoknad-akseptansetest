@@ -131,7 +131,6 @@ const startAndResetSøknad = async (t: TestController, cnt: number) => {
 };
 
 const ventPåKvittering = async (t: TestController) => {
-    await t.wait(15000);
     await t.expect(Selector('.søknadSendt').exists).eql(true);
 };
 
