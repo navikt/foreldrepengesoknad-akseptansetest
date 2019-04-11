@@ -44,7 +44,6 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Standa
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
     await TestUtils.gåVidere(t);
-    await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
     await TestUtils.ventPåKvittering(t);
@@ -101,6 +100,8 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_far))('Far og
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
     await TestUtils.gåVidere(t);
+    await manglendeVedleggPage.uploadVedlegg(t);
+    await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
     await TestUtils.ventPåKvittering(t);
@@ -135,9 +136,6 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Alenem
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await manglendeVedleggPage.uploadVedlegg(t);
-    await manglendeVedleggPage.setTerminbekreftelseDato(t, new Date())
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
