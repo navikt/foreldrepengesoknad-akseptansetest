@@ -2,7 +2,7 @@ import { Role, Selector, ClientFunction } from 'testcafe';
 import { config } from '../../config';
 
 export const waitForIDPortenOptionPage = ClientFunction(() => {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
         window.setInterval(() => {
             if (document.location.href.indexOf('login.microsoftonline.com') >= 0) {
                 resolve();
@@ -34,21 +34,34 @@ class LoginPM {
         this.signInButtonB2C = Selector('.login');
     }
 
-    login(fnr: string) {
-        return Role(config.url, async t => {
+    fillOutLoginForm = (t) => {
+        return t
+            .typeText(this.usernameField, config.user)
+            .click(this.nextButton)
+            .typeText(this.passwordField, config.pass)
+            .click(this.signInButtonAzure)
+            .click(this.noButton);
+    };
+
+    login = (fnr: string) => {
+        return Role(config.url, async (t) => {
             waitForIDPortenOptionPage();
-            await t
-                .click(this.utenIdPortenButton)
-                .typeText(this.usernameField, config.user)
-                .click(this.nextButton)
-                .typeText(this.passwordField, config.pass)
-                .click(this.signInButtonAzure)
-                .click(this.dontShowAgainChecker)
-                .click(this.noButton)
-                .typeText(this.fnrField, fnr)
-                .click(this.signInButtonB2C);
+            await t.click(this.utenIdPortenButton);
+            await this.fillOutLoginForm(t);
+            if (await this.fnrField.exists) {
+                await t.wait(2000).typeText(this.fnrField, fnr);
+            } else if (await this.noButton.exists) {
+                await t
+                    .click(this.dontShowAgainChecker)
+                    .click(this.noButton)
+                    .typeText(this.fnrField, fnr);
+            } else if (await this.usernameField.exists) {
+                await this.fillOutLoginForm(t);
+                await t.typeText(this.fnrField, fnr);
+            }
+            await t.click(this.signInButtonB2C);
         });
-    }
+    };
 }
 
 export default LoginPM;

@@ -12,6 +12,7 @@ import ArbeidsforholdOgInntektPage from '../pages/ArbeidsforholdOgInntekstPage';
 import OppsummeringPage from '../pages/OppsummeringPage';
 
 import { config } from '../../config';
+import ManglendeVedleggPage from '../pages/ManglendeVedleggPage';
 
 const inngangPage = new InngangPage();
 const velkommenPage = new VelkommenPage();
@@ -21,6 +22,7 @@ const uttaksplanSkjemaPage = new UttaksplanSkjemaPage();
 const uttaksplanPage = new UttaksplanPage();
 const utenlandsoppholdPage = new UtenlandsoppholdPage();
 const arbeidOgInntektPage = new ArbeidsforholdOgInntektPage();
+const manglendeVedleggPage = new ManglendeVedleggPage();
 const oppsummeringPage = new OppsummeringPage();
 
 fixture(`Standardsøknader`);
@@ -41,6 +43,8 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Standa
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await manglendeVedleggPage.uploadVedlegg(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
@@ -67,6 +71,8 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_far))('Standa
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await manglendeVedleggPage.uploadVedlegg(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
@@ -97,6 +103,8 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_far))('Far og
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await manglendeVedleggPage.uploadVedlegg(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
@@ -132,6 +140,8 @@ test.before(async (t) => TestUtils.setParent(t, config.fnr_default_mor))('Alenem
     await utenlandsoppholdPage.ingenUtenlandsopphold(t);
     await TestUtils.gåVidere(t);
     await arbeidOgInntektPage.standard(t);
+    await TestUtils.gåVidere(t);
+    await manglendeVedleggPage.uploadVedlegg(t);
     await TestUtils.gåVidere(t);
     await oppsummeringPage.aksepterVilkår(t);
     await TestUtils.gåVidere(t);
