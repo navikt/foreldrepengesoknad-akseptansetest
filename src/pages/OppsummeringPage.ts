@@ -9,6 +9,6 @@ export default class OppsummeringPage {
     }
 
     async aksepterVilkår(t: TestController) {
-        await t.click(this.bekreftVilkår);
+        await t.click(this.bekreftVilkår.parent());
     }
 }

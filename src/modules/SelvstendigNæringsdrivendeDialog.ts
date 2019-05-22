@@ -50,21 +50,21 @@ class SelvstendigNæringsdrivendeDialog {
             .toDate();
 
         await t
-            .click(this.dagmammaCb)
+            .click(this.dagmammaCb.parent())
             .typeText(this.navnInput, 'NAV dagmamma')
-            .click(this.registrertINorgeRb)
+            .click(this.registrertINorgeRb.parent())
             .typeText(this.orgnrInput, '979312059')
             .typeText(this.startInput, TestUtils.dateToString(startet))
             .pressKey('tab')
             .typeText(this.avsluttetInput, TestUtils.dateToString(avsluttet))
             .pressKey('tab')
             .typeText(this.inntektInput, '250000')
-            .click(this.harBlittYrkesaktivRb)
+            .click(this.harBlittYrkesaktivRb.parent())
             .typeText(this.datoYrkesaktivInput, TestUtils.dateToString(yrkesaktiv))
-            .click(this.harRegnskapsførerRb)
+            .click(this.harRegnskapsførerRb.parent())
             .typeText(this.navnRegnskapseførerInput, 'Henrik Ibsen')
             .typeText(this.tlfRegnskapseførerInput, '11223344')
-            .click(this.erNæreVennerRb)
+            .click(this.erNæreVennerRb.parent())
             .click(this.leggTilBt);
     }
 }

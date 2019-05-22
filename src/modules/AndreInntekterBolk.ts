@@ -15,7 +15,7 @@ class AndreInntekterBolk {
 
     async fyllUtJobbIUtlandet(t: TestController) {
         const dialog = new AndreInntekterDialog();
-        await t.click(this.harHattAndreInntekterJaRb).click(this.leggTilBt);
+        await t.click(this.harHattAndreInntekterJaRb.parent()).click(this.leggTilBt);
         await dialog.fyllUt(t);
     }
 }

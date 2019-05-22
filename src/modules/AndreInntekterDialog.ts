@@ -35,7 +35,7 @@ class AndreInntekterDialog {
             .add(10, 'days')
             .toDate();
         await t
-            .click(this.jobbIUtlandet.rb)
+            .click(this.jobbIUtlandet.rb.parent())
             .click(this.jobbIUtlandet.landSelect)
             .click(this.jobbIUtlandet.landSelect.find('option[value="IT"]'))
             .typeText(this.jobbIUtlandet.arbeidsgivernavn, 'Ibsen Foundation')
