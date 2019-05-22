@@ -31,10 +31,10 @@ class SelvstendigNæringsdrivendeDialog {
         this.inntektInput = Selector('input[name="selvstendigNæringsdrivende-næringsinntekt"]');
         this.harBlittYrkesaktivRb = StegSelectors.radioPanelElement('harBlittYrkesaktivSisteTreÅr', 'ja');
         this.datoYrkesaktivInput = Selector('input[name="oppstartsdato"]');
-        this.harRegnskapsførerRb = Selector('input[name="harDuRegnskapsfører"]');
+        this.harRegnskapsførerRb = StegSelectors.radioPanelElement('harDuRegnskapsfører', 'ja');
         this.navnRegnskapseførerInput = Selector('input[name="næringsrelasjon-navn"]');
         this.tlfRegnskapseførerInput = Selector('input[name="telefonnr"]');
-        this.erNæreVennerRb = Selector('input[name="erNærVennEllerFamilieAvPerson"]');
+        this.erNæreVennerRb = StegSelectors.radioPanelElement('erNærVennEllerFamilieAvPerson', 'ja');
         this.leggTilBt = Selector('.modalForm__buttonrow button.modalForm__submitButton');
     }
 
