@@ -5,12 +5,18 @@ const avbrytSøknadLenke = Selector('#avbrytSøknadLenke');
 const radioPanelGruppe = (name: string) => Selector(`input[name="${name}"]`).parent('.radioPanelGruppe');
 const radioPanelElement = (name: string, value: string | number) =>
     Selector(`input[name="${name}"][value="${value}"]`).parent('label');
+const checkboxPanelElement = (value: string | number, name?: string) => {
+    return name
+        ? Selector(`input[type="checkbox"][name="${name}"][value="${value}"]`).parent('label')
+        : Selector(`input[type="checkbox"][value="${value}"]`).parent('label');
+};
 
 const StegSelectors = {
     fortsettKnapp,
     avbrytSøknadLenke,
     radioPanelGruppe,
-    radioPanelElement
+    radioPanelElement,
+    checkboxPanelElement
 };
 
 export default StegSelectors;

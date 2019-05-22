@@ -21,7 +21,7 @@ class SelvstendigNæringsdrivendeDialog {
     leggTilBt: Selector;
 
     constructor() {
-        this.dagmammaCb = Selector('input[value="DAGMAMMA"]');
+        this.dagmammaCb = StegSelectors.checkboxPanelElement('DAGMAMMA');
         this.navnInput = Selector('input[name="selvstendigNæringsdrivende-navn"]');
         this.registrertINorgeRb = StegSelectors.radioPanelElement('erNæringenRegistrertINorge', 'ja');
         this.orgnrInput = Selector('input[name="selvstendigNæringsdrivende-orgnr"]');
