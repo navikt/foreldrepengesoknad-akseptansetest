@@ -8,7 +8,7 @@ export default class VelkommenPageModel {
     velkommenTittel: Selector;
 
     constructor() {
-        this.bekreftVilkår = Selector('.bekreftCheckboksPanel input[type=checkbox]');
+        this.bekreftVilkår = Selector('.bekreftCheckboksPanel label');
         this.startSøknadKnapp = Selector('.velkommen__startSøknadKnapp');
         this.søknadstypeRb = Selector('input[name="søknadstype"]');
         this.velkommenTittel = Selector('.velkommen__tittel');

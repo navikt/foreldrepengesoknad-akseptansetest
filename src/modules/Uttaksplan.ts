@@ -7,14 +7,9 @@ class Uttaksplan {
     utsettEnPeriodeForm: Selector;
     fomInput: Selector;
     tomInput: Selector;
-    kvote: Selector;
-    årsakTilUtsettelse: Selector;
-    samtidigUttak: Selector;
-    gradertUttak: Selector;
     aktivitetskravInput: Selector;
     leggTilPeriodeKnapp: Selector;
     lukkEndrePeriodeKnapp: Selector;
-    periodenGjelder: Selector;
 
     constructor() {
         this.openNyPeriodeForm = Selector('button[data-name="openNyPeriodeForm"]');
@@ -24,29 +19,24 @@ class Uttaksplan {
         this.leggTilPeriodeKnapp = Selector('button[data-name="leggTilPeriode"]');
         this.fomInput = Selector('input[name="fraDatoInput"]');
         this.tomInput = Selector('input[name="tilDatoInput"]');
-        this.kvote = TestUtils.getRadioPanelGruppe('kvote');
-        this.årsakTilUtsettelse = TestUtils.getRadioPanelGruppe('årsakTilUtsettelse');
-        this.samtidigUttak = TestUtils.getRadioPanelGruppe('samtidigUttak');
         this.aktivitetskravInput = Selector('select[name="hvaSkalMorGjøre.spørsmål"]');
-        this.gradertUttak = TestUtils.getRadioPanelGruppe('ønskerDuGradertUttak');
         this.lukkEndrePeriodeKnapp = Selector('button.endreperiodeForm__lukkPeriode');
-        this.periodenGjelder = TestUtils.getRadioPanelGruppe('periodenGjelder');
     }
 
     async selectKvote(t: TestController, kvote: string) {
-        await TestUtils.selectRadioVerdi(t, this.kvote, kvote);
+        await TestUtils.selectRadio(t, 'kvote', kvote);
     }
 
     async selectSamtidigUttak(t: TestController, samtidigUttak: string) {
-        await TestUtils.selectRadioVerdi(t, this.samtidigUttak, samtidigUttak);
+        await TestUtils.selectRadio(t, 'samtidigUttak', samtidigUttak);
     }
 
     async selectGradering(t: TestController, gradering: string) {
-        await TestUtils.selectRadioVerdi(t, this.gradertUttak, gradering);
+        await TestUtils.selectRadio(t, 'ønskerDuGradertUttak', gradering);
     }
 
     async selectÅrsakTilUtsettelse(t: TestController, årsak: string) {
-        await TestUtils.selectRadioVerdi(t, this.årsakTilUtsettelse, årsak);
+        await TestUtils.selectRadio(t, 'årsakTilUtsettelse', årsak);
     }
 
     async selectAkvititetskrav(t: TestController, aktivitet: string) {
@@ -54,7 +44,7 @@ class Uttaksplan {
     }
 
     async selectPeriodenGjelder(t: TestController, forelder: string) {
-        await TestUtils.selectRadioVerdi(t,this.periodenGjelder, forelder);
+        await TestUtils.selectRadio(t, 'periodenGjelder', forelder);
     }
 
     async leggInnAntallUker(t: TestController, antallUker: number, startDato: Date = new Date()) {

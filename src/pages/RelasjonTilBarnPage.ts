@@ -14,16 +14,12 @@ export default class RelasjonTilBarnPage {
         fødselsdatoerFlere0: Selector;
         feilAnkomstdato: Selector;
     };
-    erBarnetFødt: Selector;
-    antallBarn: Selector;
     antallBarnSelect: Selector;
     fødselsdato: Selector;
     termindato: Selector;
     ettBarn: Selector;
 
     constructor() {
-        this.erBarnetFødt = TestUtils.getRadioPanelGruppe('barnFødt');
-        this.antallBarn = TestUtils.getRadioPanelGruppe('antallBarn');
         this.antallBarnSelect = Selector('select[name="antallBarnSelect"]');
         this.fødselsdato = Selector('#fødselsdato');
         this.termindato = Selector('input[name="termindato"]');
@@ -42,14 +38,14 @@ export default class RelasjonTilBarnPage {
     }
 
     async velgBarnetErFødt(t: TestController, født: boolean) {
-        await TestUtils.selectRadioVerdi(t, this.erBarnetFødt, født ? 'ja' : 'nei');
+        await TestUtils.selectRadio(t, 'barnFødt', født ? 'ja' : 'nei');
     }
 
     async velgAntallBarn(t: TestController, antall: number = 1) {
         if (antall <= 3) {
-            await TestUtils.selectRadioVerdi(t, this.antallBarn, `${antall}`);
+            await TestUtils.selectRadio(t, 'antallBarn', `${antall}`);
         } else {
-            await TestUtils.selectRadioVerdi(t, this.antallBarn, '3');
+            await TestUtils.selectRadio(t, 'antallBarn', '3');
             await t.click(this.antallBarnSelect);
             await t.click(this.antallBarnSelect.find(`option[value="${antall}"]`));
         }
@@ -99,13 +95,13 @@ export default class RelasjonTilBarnPage {
 
         const { adopsjon } = this;
         await t
-            .click(adopsjon.gjelderStebarnsadopsjonNei)
+            .click(adopsjon.gjelderStebarnsadopsjonNei.parent('label'))
             .typeText(adopsjon.adopsjonsdato, TestUtils.dateToString(adopsjonsdato))
             .pressKey('tab')
-            .click(this.ettBarn)
+            .click(this.ettBarn.parent('label'))
             .typeText(adopsjon.fødselsdatoerFlere0, TestUtils.dateToString(fødselsdato))
             .pressKey('tab')
-            .click(adopsjon.adoptertIUtlandetJa)
+            .click(adopsjon.adoptertIUtlandetJa.parent('label'))
             .typeText(adopsjon.ankomstdato, TestUtils.dateToString(ankomstdatoBeforeFødselsdato))
             .pressKey('tab');
 

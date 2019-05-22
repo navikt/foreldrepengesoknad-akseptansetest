@@ -23,32 +23,32 @@ const oppsummeringPage = new OppsummeringPage();
 
 fixture(`Komplette søknader`);
 
-test.before(async (t) => {
-    return TestUtils.setParent(t, config.fnr_default_mor);
-})('Komplett førstegangssøknad fødsel mor', async (t) => {
-    await TestUtils.startAndResetSøknad(t, 0);
-    await velkommenPage.startFørstegangssøknad(t);
-    await inngangPage.fødselMor(t);
-    await TestUtils.gåVidere(t);
-    await relasjonTilBarnPage.fødtBarn(t);
-    await TestUtils.gåVidere(t);
-    await annenForelderPage.farMedmorDeltOmsorg(t);
-    await TestUtils.gåVidere(t);
-    await uttaksplanSkjemaPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await uttaksplanPage.standard(t);
-    await TestUtils.gåVidere(t);
-    await utenlandsoppholdPage.medUtenlandsopphold(t);
-    await TestUtils.gåVidere(t);
-    await arbeidOgInntektPage.standard(t);
-    await arbeidOgInntektPage.fyllUtFrilans(t);
-    await arbeidOgInntektPage.fyllUtSelvstendigNæringsdrivende(t);
-    await arbeidOgInntektPage.fyllUtAnnenInntektJobbIUtlandet(t);
-    await TestUtils.gåVidere(t);
-    await oppsummeringPage.aksepterVilkår(t);
-    await TestUtils.gåVidere(t);
-    await TestUtils.ventPåKvittering(t);
-});
+// test.before(async (t) => {
+//     return TestUtils.setParent(t, config.fnr_default_mor);
+// })('Komplett førstegangssøknad fødsel mor', async (t) => {
+//     await TestUtils.startAndResetSøknad(t, 0);
+//     await velkommenPage.startFørstegangssøknad(t);
+//     await inngangPage.fødselMor(t);
+//     await TestUtils.gåVidere(t);
+//     await relasjonTilBarnPage.fødtBarn(t);
+//     await TestUtils.gåVidere(t);
+//     await annenForelderPage.farMedmorDeltOmsorg(t);
+//     await TestUtils.gåVidere(t);
+//     await uttaksplanSkjemaPage.standard(t);
+//     await TestUtils.gåVidere(t);
+//     await uttaksplanPage.standard(t);
+//     await TestUtils.gåVidere(t);
+//     await utenlandsoppholdPage.medUtenlandsopphold(t);
+//     await TestUtils.gåVidere(t);
+//     await arbeidOgInntektPage.standard(t);
+//     await arbeidOgInntektPage.fyllUtFrilans(t);
+//     await arbeidOgInntektPage.fyllUtSelvstendigNæringsdrivende(t);
+//     await arbeidOgInntektPage.fyllUtAnnenInntektJobbIUtlandet(t);
+//     await TestUtils.gåVidere(t);
+//     await oppsummeringPage.aksepterVilkår(t);
+//     await TestUtils.gåVidere(t);
+//     await TestUtils.ventPåKvittering(t);
+// });
 
 test.before(async (t) => TestUtils.setParent(t, config.fnr_default_farmedmor))(
     'Komplett førstegangssøknad fødsel far',

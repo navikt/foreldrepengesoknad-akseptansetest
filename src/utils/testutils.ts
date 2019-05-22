@@ -27,14 +27,14 @@ const avbrytSøknad = async (t: TestController) => {
     await t.expect(getPath()).eql('/velkommen');
 };
 
-const selectRadioVerdi = async (t: TestController, radiogruppe: Selector, verdi: string) => {
-    const radio = radiogruppe.find(`input[value="${verdi}"]`).parent('label');
-    await t.expect(radio.count).eql(1);
-    await t.click(radio);
+const selectRadio = async (t: TestController, name: string, value: string | number) => {
+    const rbLabel = await StegSelectors.radioPanelElement(name, value).parent('label');
+    await t.click(rbLabel);
 };
 
-const selectRadio = async (t: TestController, name: string, value: string | number) => {
-    await t.click(StegSelectors.radioPanelElement(name, value));
+const selectCheckbox = async (t: TestController, value: string | number, name?: string) => {
+    const rbLabel = await StegSelectors.checkboxPanelElement(value, name).parent('label');
+    await t.click(rbLabel);
 };
 
 const selectDropdown = async (t: TestController, dropdown: Selector, value: string) => {
@@ -141,7 +141,6 @@ const TestUtils = {
     getHost,
     getRadioPanelGruppe,
     gåVidere,
-    selectRadioVerdi,
     selectRadio,
     selectDropdown,
     selectRangeValue,
@@ -151,7 +150,8 @@ const TestUtils = {
     setParent,
     startAndResetSøknad,
     waitForInitialDataLoaded,
-    ventPåKvittering
+    ventPåKvittering,
+    selectCheckbox
 };
 
 export default TestUtils;

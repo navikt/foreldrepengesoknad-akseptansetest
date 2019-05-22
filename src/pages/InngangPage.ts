@@ -1,20 +1,14 @@
 import TestUtils from '../utils/testutils';
 
 export default class InngangPageModel {
-    søkersituasjon: Selector;
-    søkerrolle: Selector;
-
-    constructor() {
-        this.søkersituasjon = TestUtils.getRadioPanelGruppe('søkersituasjon');
-        this.søkerrolle = TestUtils.getRadioPanelGruppe('søkerrolle');
-    }
+    constructor() {}
 
     async selectSøkersituasjon(t: TestController, situasjon: string) {
-        await TestUtils.selectRadioVerdi(t, this.søkersituasjon, situasjon);
+        await TestUtils.selectRadio(t, 'søkersituasjon', situasjon);
     }
 
     async selectSøkerrolle(t: TestController, rolle: string) {
-        await TestUtils.selectRadioVerdi(t, this.søkerrolle, rolle);
+        await TestUtils.selectRadio(t, 'søkerrolle', rolle);
     }
 
     async fødselMor(t: TestController) {
