@@ -28,7 +28,7 @@ const avbrytSøknad = async (t: TestController) => {
 };
 
 const selectRadioVerdi = async (t: TestController, radiogruppe: Selector, verdi: string) => {
-    const radio = radiogruppe.find(`input[value="${verdi}"]`);
+    const radio = radiogruppe.find(`input[value="${verdi}"]`).parent('label');
     await t.expect(radio.count).eql(1);
     await t.click(radio);
 };

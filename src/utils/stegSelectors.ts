@@ -3,7 +3,8 @@ import { Selector } from 'testcafe';
 const fortsettKnapp = Selector('.steg .fortsettKnapp');
 const avbrytSøknadLenke = Selector('#avbrytSøknadLenke');
 const radioPanelGruppe = (name: string) => Selector(`input[name="${name}"]`).parent('.radioPanelGruppe');
-const radioPanelElement = (name: string, value: string | number) => Selector(`input[name="${name}"][value="${value}"]`);
+const radioPanelElement = (name: string, value: string | number) =>
+    Selector(`input[name="${name}"][value="${value}"]`).parent('label');
 
 const StegSelectors = {
     fortsettKnapp,
