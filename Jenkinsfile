@@ -26,7 +26,9 @@ node {
     stage('Tests') {
         try {
             timeout(time: 10, unit: 'MINUTES') {
-                sh 'npm run testWithoutProxy'
+                withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
+                    sh 'npm test'
+                }
                 slackSend([
                         color  : 'good',
                         message: "Akseptansetestene for foreldrepengesøknad er OK :tada:"
