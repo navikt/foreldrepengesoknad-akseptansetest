@@ -8,13 +8,13 @@ node {
     }
 
     stage('Checkout') {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
             sh 'git clone https://github.com/navikt/foreldrepengesoknad-akseptansetest.git .'
         }
     }
 
     stage('Setup') {
-        withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
             sh 'npm i'
         }
 
@@ -26,7 +26,7 @@ node {
     stage('Tests') {
         try {
             timeout(time: 10, unit: 'MINUTES') {
-                withEnv(['HTTPS_PROXY=http://webproxy-utvikler.nav.no:8088']) {
+                withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
                     sh 'npm test'
                 }
                 slackSend([
