@@ -27,7 +27,7 @@ node {
         try {
             timeout(time: 10, unit: 'MINUTES') {
                 withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
-                    sh 'npm test'
+                    sh 'npm run testWithoutProxy'
                 }
                 slackSend([
                         color  : 'good',
