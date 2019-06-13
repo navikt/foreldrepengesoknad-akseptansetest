@@ -8,15 +8,11 @@ node {
     }
 
     stage('Checkout') {
-        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
-            sh 'git clone https://github.com/navikt/foreldrepengesoknad-akseptansetest.git .'
-        }
+        sh 'git clone https://github.com/navikt/foreldrepengesoknad-akseptansetest.git .'
     }
 
     stage('Setup') {
-        withEnv(['HTTPS_PROXY=http://webproxy-internett.nav.no:8088']) {
-            sh 'npm i'
-        }
+        sh 'npm i'
 
         withCredentials([file(credentialsId: 'foreldrepengesoknad_e2e_config', variable: 'TESTCONF')]) {
             sh 'cat $TESTCONF > config.js'
