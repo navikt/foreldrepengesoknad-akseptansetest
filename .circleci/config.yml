@@ -1,0 +1,26 @@
+version: 2.1
+orbs:
+    nais: navikt/nais-deployment@1.4.1
+    slack: circleci/slack@3.3.0
+
+jobs:
+    build:
+        working_directory: ~/foreldrepengesoknad-akseptansetest
+        docker:
+            - image: circleci/node:latest
+        steps:
+            - checkout
+            - run:
+                  name: Run npm install
+                  command: npm install
+
+            - run:
+                  name: Run tests
+                  command: npm run test
+
+workflows:
+    version: 2
+    deploy-nais:
+        jobs:
+            - build:
+                  context: NAIS deployment
